@@ -20,7 +20,7 @@
 class Graph {
 public:
     //constructor
-    Graph(const std::vector<Vertex<int>*>&);
+    Graph(const std::vector<Vertex*>&);
     //destructor
     virtual ~Graph();
 
@@ -29,7 +29,7 @@ public:
 
 private:
     //vector containing
-    std::vector<Vertex<int>*> vertices;
+    std::vector<Vertex*> vertices;
 };
 
 #endif /* Graph_hpp */

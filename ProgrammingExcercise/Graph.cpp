@@ -9,7 +9,7 @@
 #include "Graph.hpp"
 
 //constructor
-Graph::Graph(const std::vector<Vertex<int>*>& vertices) : vertices(vertices) {}
+Graph::Graph(const std::vector<Vertex*>& vertices) : vertices(vertices) {}
 //destructor
 Graph::~Graph() {
     //delete[] vertices;
@@ -24,7 +24,7 @@ Graph* Graph::getGraphFromStream(std::ifstream &file) {
     std::regex pattern("([0-9]+)");
 
     // empty vertices vector
-    std::vector<Vertex<int>*> vertices;
+    std::vector<Vertex*> vertices;
     // vertices counter
     int i = 0;
 
@@ -49,7 +49,7 @@ Graph* Graph::getGraphFromStream(std::ifstream &file) {
         }
         //put new Vertex into vertices vector, initialized with its number and
         //neighbours
-        vertices.push_back(new Vertex<int>(i, neighbours));
+        vertices.push_back(new Vertex(i, neighbours));
     }
     // return new graph, created by the vertices vector
     return new Graph(vertices);
