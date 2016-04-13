@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5CEB3BA11CBEB322006998E9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5CEB3BA01CBEB322006998E9 /* main.cpp */; };
+		5CEB3BA91CBEB424006998E9 /* Vertex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5CEB3BA71CBEB424006998E9 /* Vertex.cpp */; };
+		5CEB3BAC1CBEB43C006998E9 /* Graph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5CEB3BAA1CBEB43C006998E9 /* Graph.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +27,11 @@
 /* Begin PBXFileReference section */
 		5CEB3B9D1CBEB322006998E9 /* ProgrammingExcercise */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ProgrammingExcercise; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CEB3BA01CBEB322006998E9 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		5CEB3BA71CBEB424006998E9 /* Vertex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vertex.cpp; sourceTree = "<group>"; };
+		5CEB3BA81CBEB424006998E9 /* Vertex.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Vertex.hpp; sourceTree = "<group>"; };
+		5CEB3BAA1CBEB43C006998E9 /* Graph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Graph.cpp; sourceTree = "<group>"; };
+		5CEB3BAB1CBEB43C006998E9 /* Graph.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Graph.hpp; sourceTree = "<group>"; };
+		5CEB3BAD1CBEB4AA006998E9 /* graph15.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = graph15.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +50,7 @@
 			children = (
 				5CEB3B9F1CBEB322006998E9 /* ProgrammingExcercise */,
 				5CEB3B9E1CBEB322006998E9 /* Products */,
+				5CEB3BAE1CBEB4B9006998E9 /* Data */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,8 +65,21 @@
 		5CEB3B9F1CBEB322006998E9 /* ProgrammingExcercise */ = {
 			isa = PBXGroup;
 			children = (
+				5CEB3BAB1CBEB43C006998E9 /* Graph.hpp */,
+				5CEB3BAA1CBEB43C006998E9 /* Graph.cpp */,
+				5CEB3BA81CBEB424006998E9 /* Vertex.hpp */,
+				5CEB3BA71CBEB424006998E9 /* Vertex.cpp */,
 				5CEB3BA01CBEB322006998E9 /* main.cpp */,
 			);
+			path = ProgrammingExcercise;
+			sourceTree = "<group>";
+		};
+		5CEB3BAE1CBEB4B9006998E9 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				5CEB3BAD1CBEB4AA006998E9 /* graph15.txt */,
+			);
+			name = Data;
 			path = ProgrammingExcercise;
 			sourceTree = "<group>";
 		};
@@ -119,6 +140,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5CEB3BA11CBEB322006998E9 /* main.cpp in Sources */,
+				5CEB3BAC1CBEB43C006998E9 /* Graph.cpp in Sources */,
+				5CEB3BA91CBEB424006998E9 /* Vertex.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
