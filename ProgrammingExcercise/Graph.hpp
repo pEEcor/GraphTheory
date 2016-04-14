@@ -25,7 +25,7 @@ public:
     virtual ~Graph();
 
     static Graph* getGraphFromStream(std::ifstream &);
-    int getMaxDeg();
+    int const getMaxDeg() const;
 
 private:
     //vector containing

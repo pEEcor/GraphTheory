@@ -50,13 +50,16 @@ Graph* Graph::getGraphFromStream(std::ifstream &file) {
         //put new Vertex into vertices vector, initialized with its number and
         //neighbours
         vertices.push_back(new Vertex(i, neighbours));
+
+        // increase i for number of next vertex
+        i++;
     }
     // return new graph, created by the vertices vector
     return new Graph(vertices);
 }
 
 // private method which returns the greatest degree of the graph
-int Graph::getMaxDeg() {
+int const Graph::getMaxDeg() const {
 
     int temp{0};
     int max{0};
