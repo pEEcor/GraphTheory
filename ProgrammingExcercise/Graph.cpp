@@ -103,21 +103,15 @@ unsigned int Graph::getNumberOfTriangles() const {
     for (auto vertex : vertices) {
         // only take vertices with more than one neighbor into concideration
         if (vertex->getDegree() > 1) {
-            for (auto jval : vertex->getNeighbors()) {
+            for (auto ival : vertex->getNeighbors()) {
                 // only check for neighbors with higher number, to prevent Triangles to be detected more than once
-                if (jval > vertex->getNumber()-1) {
-                    Vertex *neighbor = vertices.at(jval-1);
+                if (ival > (vertex->getNumber()+1)) {
+                    Vertex *neighbor = vertices.at(ival-1);
                     // now check if vertex and neighbor have a same neighbor
-                    for (auto i : vertex->getNeighbors()) {
-                        for (auto j : neighbor->getNeighbors()) {
-                            // only check those neighbors from neighbor which are greater
-                            // cause smaller one have olready been checked
-                            //if (i > jval) {
-                                if (i == j) {
-                                    numberOfTriangles++;
-                                    std::cout << vertex->getNumber()+1 << " " << neighbor->getNumber()+1 << " " << j << std::endl;
-                                }
-                            //}
+                    for (auto i : neighbor->getNeighbors()) {
+                        if (vertex->checkForNeighbor(i) && i > ival) {
+                            numberOfTriangles++;
+                            //std::cout << vertex->getNumber()+1 << " " << ival << " " << i << std::endl;
                         }
                     }
                 }

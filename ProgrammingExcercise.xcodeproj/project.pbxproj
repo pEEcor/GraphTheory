@@ -31,8 +31,8 @@
 		5CEB3BA81CBEB424006998E9 /* Vertex.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Vertex.hpp; sourceTree = "<group>"; };
 		5CEB3BAA1CBEB43C006998E9 /* Graph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Graph.cpp; sourceTree = "<group>"; };
 		5CEB3BAB1CBEB43C006998E9 /* Graph.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Graph.hpp; sourceTree = "<group>"; };
-		5CEB3BAD1CBEB4AA006998E9 /* graph15.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = graph15.txt; sourceTree = "<group>"; };
-		5CEB3BAF1CBF71AB006998E9 /* graph25.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = graph25.txt; sourceTree = "<group>"; };
+		5CF9C0A11CC2AEE300D6EDB9 /* graph15.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = graph15.txt; sourceTree = "<group>"; };
+		5CF9C0A21CC2AEE300D6EDB9 /* graph25.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = graph25.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,8 +78,8 @@
 		5CEB3BAE1CBEB4B9006998E9 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				5CEB3BAF1CBF71AB006998E9 /* graph25.txt */,
-				5CEB3BAD1CBEB4AA006998E9 /* graph15.txt */,
+				5CF9C0A11CC2AEE300D6EDB9 /* graph15.txt */,
+				5CF9C0A21CC2AEE300D6EDB9 /* graph25.txt */,
 			);
 			name = Data;
 			path = ProgrammingExcercise;
@@ -264,6 +264,7 @@
 				5CEB3BA61CBEB322006998E9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
