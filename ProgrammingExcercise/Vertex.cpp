@@ -9,17 +9,30 @@
 #include "Vertex.hpp"
 
 // constructor
-Vertex::Vertex(const int number, const std::vector<int> &neighbours) : number(number), neighbours(neighbours) {}
+Vertex::Vertex(const int number, const std::vector<int> &neighbors) : number(number), neighbors(neighbors) {}
 
 // destructor
 Vertex::~Vertex() {}
 
 // public method, which returns the number of neighbours
 int Vertex::getDegree() const {
-    return int(neighbours.size());
+    return int(neighbors.size());
 }
 
 // public method, which return a vector of neighbours
-std::vector<int>& Vertex::getNeighbours() {
-    return neighbours;
+std::vector<int>& Vertex::getNeighbors() {
+    return neighbors;
+}
+
+unsigned long Vertex::getNumber() const {
+    return number;
+}
+
+bool Vertex::checkForNeighbor(int vertex) const {
+    for (auto ival : neighbors) {
+        if (vertex == ival) {
+            return true;
+        }
+    }
+    return false;
 };

@@ -20,11 +20,13 @@ public:
 
     // methods
     int getDegree() const;
-    std::vector<int>& getNeighbours() ;
+    std::vector<int>& getNeighbors();
+    unsigned long getNumber() const;
+    bool checkForNeighbor(int vertex) const;
     
 private:
-    std::vector<int> neighbours;
-    int number;
+    std::vector<int> neighbors;
+    unsigned long number;
 };
 
 #endif /* Vertex_hpp */

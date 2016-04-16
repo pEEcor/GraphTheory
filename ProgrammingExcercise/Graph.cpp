@@ -59,7 +59,7 @@ Graph* Graph::getGraphFromStream(std::ifstream &file) {
 }
 
 // private method which returns the greatest degree of the graph
-int const Graph::getMaxDeg() const {
+int Graph::getMaxDeg() const {
 
     int temp{0};
     int max{0};
@@ -69,6 +69,62 @@ int const Graph::getMaxDeg() const {
         }
     }
     return max;
+}
+
+// private method which returns the number of vertices
+unsigned long Graph::getNumberOfVertices() const {
+    return vertices.size();
+}
+
+// private method which returns the average degree ot the graph
+// sum of all edges / number of nodes
+double Graph::getAverageDeg() const {
+    double numOfEdges = 0;
+    for (auto ival : vertices) {
+        numOfEdges += ival->getDegree();
+    }
+    return numOfEdges / getNumberOfVertices();
+}
+
+unsigned long Graph::getNumberOfVerticesWithoutNeighbors() const {
+    unsigned long numberOfVerticesWithoutNeighbors = 0;
+    for (auto ival : vertices) {
+        if (ival->getDegree() == 0) {
+            numberOfVerticesWithoutNeighbors++;
+        }
+    }
+    return numberOfVerticesWithoutNeighbors;
+}
+
+unsigned int Graph::getNumberOfTriangles() const {
+    // the graph file counts the vertices starting with 1
+    // a.e. the vector addressing has to be shifted by 1
+    unsigned int numberOfTriangles{0};
+    for (auto vertex : vertices) {
+        // only take vertices with more than one neighbor into concideration
+        if (vertex->getDegree() > 1) {
+            for (auto jval : vertex->getNeighbors()) {
+                // only check for neighbors with higher number, to prevent Triangles to be detected more than once
+                if (jval > vertex->getNumber()-1) {
+                    Vertex *neighbor = vertices.at(jval-1);
+                    // now check if vertex and neighbor have a same neighbor
+                    for (auto i : vertex->getNeighbors()) {
+                        for (auto j : neighbor->getNeighbors()) {
+                            // only check those neighbors from neighbor which are greater
+                            // cause smaller one have olready been checked
+                            //if (i > jval) {
+                                if (i == j) {
+                                    numberOfTriangles++;
+                                    std::cout << vertex->getNumber()+1 << " " << neighbor->getNumber()+1 << " " << j << std::endl;
+                                }
+                            //}
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return numberOfTriangles;
 }
 
 

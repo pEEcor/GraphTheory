@@ -25,7 +25,11 @@ public:
     virtual ~Graph();
 
     static Graph* getGraphFromStream(std::ifstream &);
-    int const getMaxDeg() const;
+    int getMaxDeg() const;
+    unsigned long getNumberOfVertices() const;
+    double getAverageDeg() const;
+    unsigned long getNumberOfVerticesWithoutNeighbors() const;
+    unsigned int getNumberOfTriangles() const;
 
 private:
     //vector containing
