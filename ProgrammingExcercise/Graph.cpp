@@ -29,9 +29,9 @@ Graph* Graph::getGraphFromStream(std::ifstream &file) {
     int i = 0;
 
     while(getline(file, buffer)) {
-
-        // check if end has been reached
-        if (buffer == "end") {
+        
+        std::smatch m;
+        if (std::regex_search(buffer, m, std::regex("end"))) {
             break;
         }
 
