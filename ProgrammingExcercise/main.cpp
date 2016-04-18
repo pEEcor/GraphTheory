@@ -20,7 +20,7 @@ int main(int argc, const char * argv[]) {
     // create file stream and open a file
     std::ifstream file;
     std::cout << "Öffne Datei...";
-    file.open("graph25.txt", std::ios::in);
+    file.open(name, std::ios::in);
     std::cout << "Done" << std::endl;
 
     Graph* graph = NULL;

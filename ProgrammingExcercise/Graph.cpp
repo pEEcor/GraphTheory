@@ -106,9 +106,8 @@ unsigned int Graph::getNumberOfTriangles() const {
             for (auto ival : vertex->getNeighbors()) {
                 // only check for neighbors with higher number, to prevent Triangles to be detected more than once
                 if (ival > (vertex->getNumber()+1)) {
-                    Vertex *neighbor = vertices.at(ival-1);
                     // now check if vertex and neighbor have a same neighbor
-                    for (auto i : neighbor->getNeighbors()) {
+                    for (auto i : vertices.at(ival-1)->getNeighbors()) {
                         if (vertex->checkForNeighbor(i) && i > ival) {
                             numberOfTriangles++;
                             //std::cout << vertex->getNumber()+1 << " " << ival << " " << i << std::endl;
