@@ -25,6 +25,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5CBEBA941CC793E9009A63C3 /* graph34.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = graph34.txt; sourceTree = "<group>"; };
 		5CEB3B9D1CBEB322006998E9 /* ProgrammingExcercise */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ProgrammingExcercise; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CEB3BA01CBEB322006998E9 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		5CEB3BA71CBEB424006998E9 /* Vertex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vertex.cpp; sourceTree = "<group>"; };
@@ -80,9 +81,10 @@
 			children = (
 				5CF9C0A11CC2AEE300D6EDB9 /* graph15.txt */,
 				5CF9C0A21CC2AEE300D6EDB9 /* graph25.txt */,
+				5CBEBA941CC793E9009A63C3 /* graph34.txt */,
 			);
 			name = Data;
-			path = ProgrammingExcercise;
+			path = Build/Products/Debug;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

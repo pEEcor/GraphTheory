@@ -9,7 +9,7 @@
 #include "Vertex.hpp"
 
 // constructor
-Vertex::Vertex(const int number, const std::vector<int> &neighbors) : number(number), neighbors(neighbors) {}
+Vertex::Vertex(const int number, const std::vector<int> &neighbors) : number(number), neighbors(neighbors) , color(0) {}
 
 // destructor
 Vertex::~Vertex() {}
@@ -36,3 +36,11 @@ bool Vertex::checkForNeighbor(int vertex) const {
     }
     return false;
 };
+
+unsigned int Vertex::getColor() const {
+    return color;
+}
+
+void Vertex::setColor(unsigned int color) {
+    this->color = color;
+}

@@ -47,6 +47,12 @@ int main(int argc, const char * argv[]) {
         std::cout << "Durchschittsgrad ist: " << graph->getAverageDeg() << std::endl;
         std::cout << "Anzahl der Knoten ohne Nachbarn: " << graph->getNumberOfVerticesWithoutNeighbors() << std::endl;
         std::cout << "Anzahl an Dreiecken: " << graph->getNumberOfTriangles() << std::endl;
+        graph->applyGreedyColoring();
+        if (graph->getNumberColors()) {
+            std::cout << "Für Greedy Färbung benötigte Farben: " << graph->getNumberColors() << std::endl;
+        }
+        std::cout << "Approximation für X(G): ";
+        std::cout << graph->getMinNumberOfColors() << std::endl;
     }
     
     return 0;

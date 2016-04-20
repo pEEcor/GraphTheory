@@ -120,8 +120,99 @@ unsigned int Graph::getNumberOfTriangles() const {
     return numberOfTriangles;
 }
 
+void Graph::applyGreedyColoring() {
+    for (int i = 0; i < vertices.size(); i++) {
+        std::vector<unsigned int> N;
+        for (auto jval : vertices.at(i)->getNeighbors()) {
+            if (jval < i+1) {
+                N.push_back(vertices.at(jval-1)->getColor());
+            }
+            if (jval > i+1) {
+                break;
+            }
+        }
+        // determine the minimum color in N which can be assigned to the current
+        // vertex, colors starting with index 1
+        unsigned int color = 1;
+        for(const auto ival : N) {
+            if (color == ival) {
+                color++;
+            }
+        }
+        vertices.at(i)->setColor(color);
+    }
+    return;
+}
+
+void Graph::applyGreedyColoringWithSequence(std::vector<unsigned int> &seq) {
+    for (int i = 0; i < vertices.size(); i++) {
+        std::vector<unsigned int> N;
+        for (auto jval : vertices.at(seq.at(i))->getNeighbors()) {
+            if (jval < i+1) {
+                N.push_back(vertices.at(seq.at(jval-1))->getColor());
+            }
+            if (jval > i+1) {
+                break;
+            }
+        }
+        // determine the minimum color in N which can be assigned to the current
+        // vertex, colors starting with index 1
+        unsigned int color = 1;
+        for(const auto ival : N) {
+            if (color == ival) {
+                color++;
+            }
+        }
+        vertices.at(i)->setColor(color);
+    }
+    return;
+}
+
+unsigned int Graph::getNumberColors() const {
+    unsigned int numberOfColors{0};
+    for (const auto ival : vertices) {
+        if (ival->getColor() > numberOfColors) {
+            numberOfColors = ival->getColor();
+        }
+    }
+    return numberOfColors;
+}
+
+unsigned int Graph::getMinNumberOfColors() {
+    std::vector<unsigned int> numOfColors;
+    // sequence to be used as random index for Vertex selection
+    std::vector<unsigned int> sequence;
+    // put values into sequence
+    for (int k = 0; k < vertices.size(); k++) {
+        sequence.push_back(k);
+    }
+    for (int i = 0; i < 1000; i++) {
+        eraseColoring();
+        // generate random number for shuffle algorithm
+        std::random_device rd;
+        std::mt19937 g(rd());
+        // shuffle the sequence randomly
+        std::shuffle(sequence.begin(), sequence.end(), g);
+        // apply greedy coloring with sequence
+        applyGreedyColoringWithSequence(sequence);
+        // determine number of colors
+        numOfColors.push_back(getNumberColors());
+        //std::cout << i << std::endl;
+    }
+    unsigned int minNumOfColors = numOfColors.at(0);
+    for (auto ival : numOfColors) {
+        if (ival < minNumOfColors) {
+            minNumOfColors = ival;
+        }
+    }
+    return minNumOfColors;
+}
 
 
-
-
+void Graph::eraseColoring() {
+    for (auto ival : vertices) {
+        ival->setColor(0);
+    }
+    return;
+}
 

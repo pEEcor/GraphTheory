@@ -23,10 +23,13 @@ public:
     std::vector<int>& getNeighbors();
     unsigned long getNumber() const;
     bool checkForNeighbor(int vertex) const;
+    unsigned int getColor() const;
+    void setColor(unsigned int color);
     
 private:
     std::vector<int> neighbors;
     unsigned long number;
+    unsigned int color;
 };
 
 #endif /* Vertex_hpp */
