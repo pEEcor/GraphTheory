@@ -22,10 +22,10 @@
 
 class Graph {
 public:
-    //constructor
+    // constructor
     Graph(const std::vector<Vertex*>&);
-    //destructor
-    virtual ~Graph();
+    // destructor
+    ~Graph();
 
     static Graph* getGraphFromStream(std::ifstream &);
     int getMaxDeg() const;

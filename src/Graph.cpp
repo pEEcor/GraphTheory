@@ -8,11 +8,17 @@
 
 #include "Graph.hpp"
 
-//constructor
+// constructor
 Graph::Graph(const std::vector<Vertex*>& vertices) : vertices(vertices) {}
-//destructor
+
+// destructor
 Graph::~Graph() {
-    //delete[] vertices;
+    while (!vertices.empty()) {
+        // delete each Vertex
+        delete vertices.back();
+        // and pop their pointer from the vertices vector
+        vertices.pop_back();
+    };
 }
 
 //class method, which creates a graph from a given stream
@@ -107,7 +113,7 @@ unsigned int Graph::getNumberOfTriangles() const {
                 // only check for neighbors with higher number, to prevent Triangles to be detected more than once
                 if (ival > (vertex->getNumber()+1)) {
                     // now check if vertex and neighbor have a same neighbor
-                    for (auto i : vertices.at(ival-1)->getNeighbors()) {
+                    for (auto i : vertices.at((unsigned long) (ival-1))->getNeighbors()) {
                         if (vertex->checkForNeighbor(i) && i > ival) {
                             numberOfTriangles++;
                             //std::cout << vertex->getNumber()+1 << " " << ival << " " << i << std::endl;
@@ -124,12 +130,17 @@ unsigned int Graph::getNumberOfTriangles() const {
 void Graph::applyGreedyColoring() {
     // erase the current coloring first
     eraseColoring();
+    // traverse trough each vertex of the graph
     for (int i = 0; i < vertices.size(); i++) {
         std::vector<unsigned int> N;
-        for (auto jval : vertices.at(i)->getNeighbors()) {
+        // for each vertex get the colors of its neighbors
+        for (auto jval : vertices.at((unsigned long) i)->getNeighbors()) {
             if (jval < i+1) {
-                N.push_back(vertices.at(jval-1)->getColor());
+                // store colors of neighbors in N
+                N.push_back(vertices.at((unsigned long) (jval-1))->getColor());
             }
+            // if neighbor (j) is greater than current vertex (i), break the inner for loop,
+            // cause neighbors are sorted and greater ones have not been colored yet
             if (jval > i+1) {
                 break;
             }
@@ -145,12 +156,13 @@ void Graph::applyGreedyColoring() {
             if (color == ival) {
                 color++;
             }
+            // break loop, when minimum has been found
             else {
                 break;
             }
         }
          // color current vertex with minimum color
-        vertices.at(i)->setColor(color);
+        vertices.at((unsigned long) i)->setColor(color);
     }
     return;
 }
@@ -163,10 +175,10 @@ void Graph::applyGreedyColoringWithSequence(std::vector<unsigned int> &seq) {
     for (int i = 0; i < vertices.size(); i++) {
         std::vector<unsigned int> N;
         // for each vertex get the colors of its neighbors
-        for (auto jval : vertices.at(seq.at(i))->getNeighbors()) {
+        for (auto jval : vertices.at(seq.at((unsigned long) i))->getNeighbors()) {
             if (jval < i+1) {
                 // store colors of neighbors in N
-                N.push_back(vertices.at(seq.at(jval-1))->getColor());
+                N.push_back(vertices.at(seq.at((unsigned long) (jval-1)))->getColor());
             }
             // if neighbor (j) is greater than current vertex (i), break the inner for loop,
             // cause neighbors are sorted and greater ones have not been colored yet
@@ -182,9 +194,13 @@ void Graph::applyGreedyColoringWithSequence(std::vector<unsigned int> &seq) {
             if (color == ival) {
                 color++;
             }
+            // break loop, when minimum has been found
+            else {
+                break;
+            }
         }
         // color current vertex with minimum color
-        vertices.at(i)->setColor(color);
+        vertices.at((unsigned long) i)->setColor(color);
     }
     return;
 }
@@ -205,7 +221,7 @@ unsigned int Graph::getMinNumberOfColors() {
     std::vector<unsigned int> sequence;
     // put values into sequence
     for (int k = 0; k < vertices.size(); k++) {
-        sequence.push_back(k);
+        sequence.push_back((unsigned int) k);
     }
     for (int i = 0; i < 1000; i++) {
         // generate random number for shuffle algorithm
@@ -214,9 +230,9 @@ unsigned int Graph::getMinNumberOfColors() {
         // shuffle the sequence randomly
         std::shuffle(sequence.begin(), sequence.end(), g);
         // apply greedy coloring with sequence
-        this->applyGreedyColoringWithSequence(sequence);
+        applyGreedyColoringWithSequence(sequence);
         // determine number of colors
-        numOfColors.push_back(this->getNumberColors());
+        numOfColors.push_back(getNumberColors());
     }
     unsigned int minNumOfColors = numOfColors.at(0);
     for (auto ival : numOfColors) {
