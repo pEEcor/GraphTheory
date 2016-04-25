@@ -1,6 +1,6 @@
 //
 //  Graph.cpp
-//  ProgrammingExcercises
+//  GraphTheory
 //
 //  Created by Paavo Becker on 06.04.16.
 //  Copyright © 2016 xcor. All rights reserved.
@@ -120,7 +120,10 @@ unsigned int Graph::getNumberOfTriangles() const {
     return numberOfTriangles;
 }
 
+// apply greedy coloring algorithm to graph with standat sequence [1,...,n]
 void Graph::applyGreedyColoring() {
+    // erase the current coloring first
+    eraseColoring();
     for (int i = 0; i < vertices.size(); i++) {
         std::vector<unsigned int> N;
         for (auto jval : vertices.at(i)->getNeighbors()) {
@@ -136,22 +139,37 @@ void Graph::applyGreedyColoring() {
         unsigned int color = 1;
         std::sort(N.begin(), N.end());
         for(const auto ival : N) {
+            // starting with 1, compare color with colors in N, the first occurance,
+            // where color is not equal to its counterpart in N, thats the minimum
+            // color which can be used to color the current vertex
             if (color == ival) {
                 color++;
             }
+            else {
+                break;
+            }
         }
+         // color current vertex with minimum color
         vertices.at(i)->setColor(color);
     }
     return;
 }
 
+// provide a sequence in which order the greedy coloring algorithm shall be applied
 void Graph::applyGreedyColoringWithSequence(std::vector<unsigned int> &seq) {
+    // erase the current coloring first
+    eraseColoring();
+    // traverse trough each vertex of the graph
     for (int i = 0; i < vertices.size(); i++) {
         std::vector<unsigned int> N;
+        // for each vertex get the colors of its neighbors
         for (auto jval : vertices.at(seq.at(i))->getNeighbors()) {
             if (jval < i+1) {
+                // store colors of neighbors in N
                 N.push_back(vertices.at(seq.at(jval-1))->getColor());
             }
+            // if neighbor (j) is greater than current vertex (i), break the inner for loop,
+            // cause neighbors are sorted and greater ones have not been colored yet
             if (jval > i+1) {
                 break;
             }
@@ -159,11 +177,13 @@ void Graph::applyGreedyColoringWithSequence(std::vector<unsigned int> &seq) {
         // determine the minimum color in N which can be assigned to the current
         // vertex, colors starting with index 1
         unsigned int color = 1;
+        std::sort(N.begin(), N.end());
         for(const auto ival : N) {
             if (color == ival) {
                 color++;
             }
         }
+        // color current vertex with minimum color
         vertices.at(i)->setColor(color);
     }
     return;
@@ -188,7 +208,6 @@ unsigned int Graph::getMinNumberOfColors() {
         sequence.push_back(k);
     }
     for (int i = 0; i < 1000; i++) {
-        eraseColoring();
         // generate random number for shuffle algorithm
         std::random_device rd;
         std::mt19937 g(rd());
@@ -198,7 +217,6 @@ unsigned int Graph::getMinNumberOfColors() {
         this->applyGreedyColoringWithSequence(sequence);
         // determine number of colors
         numOfColors.push_back(this->getNumberColors());
-        //std::cout << i << std::endl;
     }
     unsigned int minNumOfColors = numOfColors.at(0);
     for (auto ival : numOfColors) {
