@@ -134,6 +134,7 @@ void Graph::applyGreedyColoring() {
         // determine the minimum color in N which can be assigned to the current
         // vertex, colors starting with index 1
         unsigned int color = 1;
+        std::sort(N.begin(), N.end());
         for(const auto ival : N) {
             if (color == ival) {
                 color++;
@@ -194,9 +195,9 @@ unsigned int Graph::getMinNumberOfColors() {
         // shuffle the sequence randomly
         std::shuffle(sequence.begin(), sequence.end(), g);
         // apply greedy coloring with sequence
-        applyGreedyColoringWithSequence(sequence);
+        this->applyGreedyColoringWithSequence(sequence);
         // determine number of colors
-        numOfColors.push_back(getNumberColors());
+        numOfColors.push_back(this->getNumberColors());
         //std::cout << i << std::endl;
     }
     unsigned int minNumOfColors = numOfColors.at(0);
