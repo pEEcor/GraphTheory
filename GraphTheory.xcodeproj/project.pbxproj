@@ -32,6 +32,7 @@
 		5C6588981CCE6B670074C4B6 /* Vertex.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Vertex.hpp; sourceTree = "<group>"; };
 		5CBEBA941CC793E9009A63C3 /* graph34.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = graph34.txt; sourceTree = "<group>"; };
 		5CEB3B9D1CBEB322006998E9 /* GraphTheory */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GraphTheory; sourceTree = BUILT_PRODUCTS_DIR; };
+		5CF8188B1CD0B36E00F8FCD6 /* onlinetest.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = onlinetest.txt; sourceTree = "<group>"; };
 		5CF9C0A11CC2AEE300D6EDB9 /* graph15.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = graph15.txt; sourceTree = "<group>"; };
 		5CF9C0A21CC2AEE300D6EDB9 /* graph25.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = graph25.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -82,6 +83,7 @@
 				5CF9C0A11CC2AEE300D6EDB9 /* graph15.txt */,
 				5CF9C0A21CC2AEE300D6EDB9 /* graph25.txt */,
 				5CBEBA941CC793E9009A63C3 /* graph34.txt */,
+				5CF8188B1CD0B36E00F8FCD6 /* onlinetest.txt */,
 			);
 			name = Data;
 			path = Build/Products/Debug;

@@ -30,6 +30,7 @@ public:
     static Graph* getGraphFromStream(std::ifstream &);
     int getMaxDeg() const;
     unsigned long getNumberOfVertices() const;
+    auto getNumberOfVerticesWithDeg(const int) const -> unsigned int;
     double getAverageDeg() const;
     unsigned long getNumberOfVerticesWithoutNeighbors() const;
     unsigned int getNumberOfTriangles() const;

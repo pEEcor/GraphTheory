@@ -77,12 +77,23 @@ int Graph::getMaxDeg() const {
     return max;
 }
 
-// private method which returns the number of vertices
+// method which returns the number of vertices
 unsigned long Graph::getNumberOfVertices() const {
     return vertices.size();
 }
 
-// private method which returns the average degree ot the graph
+// methed to return the number of vertices with a given deg
+auto Graph::getNumberOfVerticesWithDeg(const int deg) const -> unsigned int {
+    unsigned int counter{0};
+    for (auto ival : vertices) {
+        if (ival->getNeighbors().size() == deg) {
+            counter++;
+        }
+    }
+    return counter;
+}
+
+// method which returns the average degree ot the graph
 // sum of all edges / number of nodes
 double Graph::getAverageDeg() const {
     double numOfEdges = 0;
