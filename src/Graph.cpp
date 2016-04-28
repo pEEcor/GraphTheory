@@ -123,12 +123,12 @@ auto Graph::getTriangles() const -> std::vector<std::vector<unsigned int>*>* {
                 // only check for neighbors with higher number, to prevent Triangles to be detected more than once
                 if (ival > (vertex->getNumber()+1)) {
                     // now check if vertex and neighbor have a same neighbor
-                    for (auto i : vertices.at((unsigned long) (ival-1))->getNeighbors()) {
-                        if (vertex->checkForNeighbor(i) && i > ival) {
+                    for (auto i : vertices.at((unsigned long) ival-1)->getNeighbors()) {
+                        if (i > ival && vertex->checkForNeighbor(i)) {
                             std::vector<unsigned int>* x = new std::vector<unsigned int>();
                             x->push_back((unsigned int)vertex->getNumber()+1);
-                            x->push_back(ival);
-                            x->push_back(i);
+                            x->push_back((const unsigned int &) ival);
+                            x->push_back((const unsigned int &) i);
                             vec->push_back(x);
                         }
                     }
@@ -152,11 +152,11 @@ auto Graph::getNumberOfK4() const -> unsigned int {
                     // now check if vertex and neighbor have a same neighbor
                     for (auto j : vertices.at((unsigned long) (i-1))->getNeighbors()) {
                         if (j > i && vertex->checkForNeighbor(j)) {
-                            for (auto k : vertices.at(j-1)->getNeighbors()) {
+                            for (auto k : vertices.at((unsigned long) (j-1))->getNeighbors()) {
                                 if (k > j
                                     && vertex->checkForNeighbor(k)
                                     && vertex->checkForNeighbor(j)
-                                    && vertices.at(i-1)->checkForNeighbor(k)) {
+                                    && vertices.at((unsigned long) (i-1))->checkForNeighbor(k)) {
                                         numberOfK4++;
                                 }
                             }
@@ -169,7 +169,7 @@ auto Graph::getNumberOfK4() const -> unsigned int {
     return numberOfK4;
 }
 
-unsigned int Graph::getNumberOfTriangles() const {
+unsigned int Graph::getNumberOfK3() const {
     // the graph file counts the vertices starting with 1
     // a.e. the vector addressing has to be shifted by 1
     unsigned int numberOfTriangles{0};
@@ -272,7 +272,7 @@ void Graph::applyGreedyColoringWithSequence(std::vector<unsigned int> &seq) {
     return;
 }
 
-unsigned int Graph::getNumberColors() const {
+unsigned int Graph::getNumberOfColors() const {
     unsigned int numberOfColors{0};
     for (const auto ival : vertices) {
         if (ival->getColor() > numberOfColors) {
@@ -299,7 +299,7 @@ unsigned int Graph::getMinNumberOfColors() {
         // apply greedy coloring with sequence
         applyGreedyColoringWithSequence(sequence);
         // determine number of colors
-        numOfColors.push_back(getNumberColors());
+        numOfColors.push_back(getNumberOfColors());
     }
     unsigned int minNumOfColors = numOfColors.at(0);
     for (auto ival : numOfColors) {

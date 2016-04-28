@@ -34,7 +34,7 @@ public:
     double getAverageDeg() const;
     unsigned long getNumberOfVerticesWithoutNeighbors() const;
     auto getTriangles() const -> std::vector<std::vector<unsigned int>*>*;
-    unsigned int getNumberOfTriangles() const;
+    unsigned int getNumberOfK3() const;
     auto getNumberOfK4() const -> unsigned int;
     
     // apply the greedy coloring algorithm to the graph and store corresponding
@@ -47,7 +47,7 @@ public:
     void applyGreedyColoringWithSequence(std::vector<unsigned int> &);
     
     // return the amount of colors needed for the greedy coloring
-    unsigned int getNumberColors() const;
+    unsigned int getNumberOfColors() const;
     
     // this just approximates the minimum number of colors, by applying the
     // greedy algorithm 1000 time withs using a random sequence of vertices each
