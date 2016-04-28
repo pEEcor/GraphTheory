@@ -33,7 +33,9 @@ public:
     auto getNumberOfVerticesWithDeg(const int) const -> unsigned int;
     double getAverageDeg() const;
     unsigned long getNumberOfVerticesWithoutNeighbors() const;
+    auto getTriangles() const -> std::vector<std::vector<unsigned int>*>*;
     unsigned int getNumberOfTriangles() const;
+    auto getNumberOfK4() const -> unsigned int;
     
     // apply the greedy coloring algorithm to the graph and store corresponding
     // color into each node

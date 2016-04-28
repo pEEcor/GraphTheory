@@ -113,6 +113,62 @@ unsigned long Graph::getNumberOfVerticesWithoutNeighbors() const {
     return numberOfVerticesWithoutNeighbors;
 }
 
+auto Graph::getTriangles() const -> std::vector<std::vector<unsigned int>*>* {
+    std::vector<std::vector<unsigned int>*>* vec;
+    vec = new std::vector<std::vector<unsigned int>*>;
+    for (auto vertex : vertices) {
+        // only take vertices with more than one neighbor into concideration
+        if (vertex->getDegree() > 1) {
+            for (auto ival : vertex->getNeighbors()) {
+                // only check for neighbors with higher number, to prevent Triangles to be detected more than once
+                if (ival > (vertex->getNumber()+1)) {
+                    // now check if vertex and neighbor have a same neighbor
+                    for (auto i : vertices.at((unsigned long) (ival-1))->getNeighbors()) {
+                        if (vertex->checkForNeighbor(i) && i > ival) {
+                            std::vector<unsigned int>* x = new std::vector<unsigned int>();
+                            x->push_back((unsigned int)vertex->getNumber()+1);
+                            x->push_back(ival);
+                            x->push_back(i);
+                            vec->push_back(x);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return vec;
+}
+
+auto Graph::getNumberOfK4() const -> unsigned int {
+    // the graph file counts the vertices starting with 1
+    // a.e. the vector addressing has to be shifted by 1
+    unsigned int numberOfK4{0};
+    for (auto vertex : vertices) {
+        // only take vertices with more than one neighbor into concideration
+        if (vertex->getDegree() > 2) {
+            for (auto i : vertex->getNeighbors()) {
+                // only check for neighbors with higher number, to prevent Triangles to be detected more than once
+                if (i > (vertex->getNumber()+1)) {
+                    // now check if vertex and neighbor have a same neighbor
+                    for (auto j : vertices.at((unsigned long) (i-1))->getNeighbors()) {
+                        if (j > i && vertex->checkForNeighbor(j)) {
+                            for (auto k : vertices.at(j-1)->getNeighbors()) {
+                                if (k > j
+                                    && vertex->checkForNeighbor(k)
+                                    && vertex->checkForNeighbor(j)
+                                    && vertices.at(i-1)->checkForNeighbor(k)) {
+                                        numberOfK4++;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return numberOfK4;
+}
+
 unsigned int Graph::getNumberOfTriangles() const {
     // the graph file counts the vertices starting with 1
     // a.e. the vector addressing has to be shifted by 1
