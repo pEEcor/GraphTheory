@@ -77,13 +77,14 @@ Graph *Graph::getRandomGraph(unsigned int numOfKnots, float EdgeProb) {
     std::mt19937 g(seed());
     // get distribution according to specified probability p
     std::uniform_int_distribution<int> uniDistribution(0, 1/EdgeProb);
-    for (auto vertex : vertices)
+    for (auto vertex : vertices) {
         for (int j = (int)vertex->getNumber(); j < numOfKnots; ++j) {
             if (uniDistribution(g) == 0) {
                 vertex->addNeigbor((unsigned int)j);
                 vertices.at(j-1)->addNeigbor((unsigned int)vertex->getNumber()+1);
             }
         }
+    }
     // return new graph, created by the vertices vector
     return new Graph(vertices);
 }

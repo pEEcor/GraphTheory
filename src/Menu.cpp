@@ -89,7 +89,7 @@ bool Menu::_dataTypeHandler() {
             float probability{1};
             std::cout << "Probability for an Edge to exist [Float]: ";
             std::cin >> probability;
-            std::cout << "Creating Graph...";
+            std::cout << "Creating Graph..." << std::endl;
             graph = Graph::getRandomGraph(vertices, probability);
             std::cout << "Done" << std::endl;
         }
@@ -159,8 +159,9 @@ bool Menu::_optionHandler(int choice) {
             std::cout << "Number of runs to apply greedy with random seq.: ";
             unsigned int n{0};
             std::cin >> n;
+            int result = graph->getMinNumberOfColors(n);
             std::cout << "Approximation für chi(G) with " << n << " random seq: ";
-            std::cout << graph->getMinNumberOfColors(n) << std::endl;
+            std::cout << result << std::endl;
         }
             return true;
         case 10: {
