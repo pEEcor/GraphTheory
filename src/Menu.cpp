@@ -45,7 +45,7 @@ void Menu::_end() {
 
 bool Menu::_dataTypeHandler() {
     unsigned int choice{1};
-    std::cout << "Choice: ";
+    std::cout << "Graph Source: ";
     std::cin >> choice;
     
     switch (choice) {
@@ -156,9 +156,11 @@ bool Menu::_optionHandler(int choice) {
         }
             return true;
         case 9: {
-            // TODO get amount of attempts from user
-            std::cout << "Approximation für X(G): ";
-            std::cout << graph->getMinNumberOfColors() << std::endl;
+            std::cout << "Number of runs to apply greedy with random seq.: ";
+            unsigned int n{0};
+            std::cin >> n;
+            std::cout << "Approximation für chi(G) with " << n << " random seq: ";
+            std::cout << graph->getMinNumberOfColors(n) << std::endl;
         }
             return true;
         case 10: {
@@ -172,8 +174,6 @@ bool Menu::_optionHandler(int choice) {
             return true;
     }
 }
-
-
 
 void Menu::_printMenu(const std::vector<std::string>& data) {
     // find biggest entry

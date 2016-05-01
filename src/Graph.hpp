@@ -50,9 +50,9 @@ public:
     unsigned int getNumberOfColors() const;
     
     // this just approximates the minimum number of colors, by applying the
-    // greedy algorithm 1000 time withs using a random sequence of vertices each
+    // greedy algorithm n (100 default) times using a random sequence of vertices each
     // time
-    unsigned int getMinNumberOfColors();
+    unsigned int getMinNumberOfColors(unsigned int n = 100);
     
 
 private:

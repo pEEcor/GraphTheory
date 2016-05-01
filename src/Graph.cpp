@@ -282,7 +282,7 @@ unsigned int Graph::getNumberOfColors() const {
     return numberOfColors;
 }
 
-unsigned int Graph::getMinNumberOfColors() {
+unsigned int Graph::getMinNumberOfColors(unsigned int n) {
     std::vector<unsigned int> numOfColors;
     // sequence to be used as random index for Vertex selection
     std::vector<unsigned int> sequence;
@@ -290,7 +290,7 @@ unsigned int Graph::getMinNumberOfColors() {
     for (int k = 0; k < vertices.size(); k++) {
         sequence.push_back((unsigned int) k);
     }
-    for (int i = 0; i < 1000; i++) {
+    for (int i = 0; i < n; i++) {
         // generate random number for shuffle algorithm
         std::random_device rd;
         std::mt19937 g(rd());

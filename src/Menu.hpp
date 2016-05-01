@@ -31,7 +31,7 @@ private:
     // selection for graph types
     std::vector<std::string> graphTypes {"Exit", "Graph from File", "Random Graph"};
     // selection for options
-    std::vector<std::string> options {"Exit", "MaxDeg", "AverageDeg", "NumOfVertices", "NumberOfVerticesWithDeg", "NumOfVerticesWithoutNeighbors", "NumOfK3", "NumberOfK4", "Greedy Coloring", "Approximation für X(G)", "Apply All"};
+    std::vector<std::string> options {"Exit", "MaxDeg", "AverageDeg", "NumOfVertices", "NumberOfVerticesWithDeg", "NumOfVerticesWithoutNeighbors", "NumOfK3", "NumberOfK4", "Greedy Coloring", "Approximation für chi(G)", "Apply all"};
     void _printMenu(const std::vector<std::string>&);
     
     bool _dataTypeHandler();
