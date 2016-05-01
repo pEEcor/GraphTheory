@@ -8,10 +8,14 @@
 
 #include <iostream>
 #include "Graph.hpp"
+#include "Menu.hpp"
 #include <fstream>
 
 int main(int argc, const char * argv[]) {
     std::cout << "Starting...\n\n";
+    
+    Menu menu;
+    menu.show();
 
     std::string name;
     std::cout << "Datei zum Lesen öffnen: ";
