@@ -34,8 +34,8 @@ private:
     std::vector<std::string> options {"Exit", "MaxDeg", "AverageDeg", "NumOfVertices", "NumberOfVerticesWithDeg", "NumOfVerticesWithoutNeighbors", "NumOfK3", "NumberOfK4", "Greedy Coloring", "Approximation für X(G)", "Apply All"};
     void _printMenu(const std::vector<std::string>&);
     
-    void _dataTypeHandler();
-    void _optionHandler();
+    bool _dataTypeHandler();
+    bool _optionHandler(int choice = -1);
     
     Graph* graph = NULL;
 };
