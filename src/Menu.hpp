@@ -13,6 +13,7 @@
 #include <iostream>
 #include <string>
 #include <sys/ioctl.h>
+#include "Graph.hpp"
 
 #define CHARS_PER_SECTION 30
 
@@ -27,12 +28,16 @@ private:
     void _end();
     unsigned int _windowCol = 0;
     unsigned int _windowRow = 0;
+    // selection for graph types
+    std::vector<std::string> graphTypes {"Exit", "Graph from File", "Random Graph"};
+    // selection for options
     std::vector<std::string> options {"Exit", "MaxDeg", "AverageDeg", "NumOfVertices", "NumberOfVerticesWithDeg", "NumOfVerticesWithoutNeighbors", "NumOfK3", "NumberOfK4", "Greedy Coloring", "Approximation für X(G)", "Apply All"};
+    void _printMenu(const std::vector<std::string>&);
     
-    void _printOptions();
-    void _printDataChoice();
+    void _dataTypeHandler();
+    void _optionHandler();
     
-    void _handler();
+    Graph* graph = NULL;
 };
 
 #endif /* Menu_hpp */
