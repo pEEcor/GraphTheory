@@ -44,3 +44,10 @@ unsigned int Vertex::getColor() const {
 void Vertex::setColor(unsigned int color) {
     this->color = color;
 }
+
+void Vertex::addNeigbor(unsigned int newNeighbor) {
+    auto result = std::find(neighbors.begin(), neighbors.end(), newNeighbor);
+    if (result == neighbors.end()) {
+        neighbors.push_back(newNeighbor);
+    }
+}

@@ -21,6 +21,7 @@ public:
     // methods
     int getDegree() const;
     std::vector<int>& getNeighbors();
+    void addNeigbor(unsigned int);
     unsigned long getNumber() const;
     bool checkForNeighbor(int vertex) const;
     unsigned int getColor() const;
