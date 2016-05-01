@@ -41,8 +41,8 @@ Graph* Graph::getGraphFromStream(std::ifstream &file) {
             break;
         }
 
-        //vector for neigbours
-        std::vector<int> neighbours;
+        //vector for neighbours
+        std::vector<int> neighbors;
 
         // find all matches in line
         std::sregex_iterator next(buffer.begin(), buffer.end(), pattern);
@@ -50,16 +50,40 @@ Graph* Graph::getGraphFromStream(std::ifstream &file) {
         while (next != end) {
             std::smatch match = *next;
             // push match into neighbours vector
-            neighbours.push_back(stoi(match.str()));
+            neighbors.push_back(stoi(match.str()));
             next++;
         }
         //put new Vertex into vertices vector, initialized with its number and
         //neighbours
-        vertices.push_back(new Vertex(i, neighbours));
+        vertices.push_back(new Vertex(i, neighbors));
 
         // increase i for number of next vertex
         i++;
     }
+    // return new graph, created by the vertices vector
+    return new Graph(vertices);
+}
+
+Graph *Graph::getRandomGraph(unsigned int numOfKnots, float EdgeProb) {
+    // generate vertices vector
+    std::vector<Vertex*> vertices;
+    for (int i = 0; i < numOfKnots; ++i) {
+        std::vector<int> neighbors;
+        vertices.push_back(new Vertex(i, neighbors));
+    }
+    // determine neighbors and put them into vertices
+    // generate some randomness
+    std::random_device seed;
+    std::mt19937 g(seed());
+    // get distribution according to specified probability p
+    std::uniform_int_distribution<int> uniDistribution(0, 1/EdgeProb);
+    for (auto vertex : vertices)
+        for (int j = (int)vertex->getNumber(); j < numOfKnots; ++j) {
+            if (uniDistribution(g) == 0) {
+                vertex->addNeigbor((unsigned int)j);
+                vertices.at(j-1)->addNeigbor((unsigned int)vertex->getNumber()+1);
+            }
+        }
     // return new graph, created by the vertices vector
     return new Graph(vertices);
 }
@@ -292,8 +316,9 @@ unsigned int Graph::getMinNumberOfColors(unsigned int n) {
     }
     for (int i = 0; i < n; i++) {
         // generate random number for shuffle algorithm
-        std::random_device rd;
-        std::mt19937 g(rd());
+        std::random_device seed;
+        // mersenne twister engine with common input parameters
+        std::mt19937 g(seed());
         // shuffle the sequence randomly
         std::shuffle(sequence.begin(), sequence.end(), g);
         // apply greedy coloring with sequence

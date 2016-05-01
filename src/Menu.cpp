@@ -90,7 +90,7 @@ bool Menu::_dataTypeHandler() {
             std::cout << "Probability for an Edge to exist [Float]: ";
             std::cin >> probability;
             std::cout << "Creating Graph...";
-            //graph = Graph::getRandomGraph(vertices, probability);
+            graph = Graph::getRandomGraph(vertices, probability);
             std::cout << "Done" << std::endl;
         }
             return true;

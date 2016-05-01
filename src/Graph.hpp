@@ -28,6 +28,7 @@ public:
     ~Graph();
 
     static Graph* getGraphFromStream(std::ifstream &);
+    static Graph* getRandomGraph(unsigned int numOfKnots, float EdgeProb);
     int getMaxDeg() const;
     unsigned long getNumberOfVertices() const;
     auto getNumberOfVerticesWithDeg(const int) const -> unsigned int;
