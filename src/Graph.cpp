@@ -227,9 +227,9 @@ void Graph::applyGreedyColoring() {
         std::vector<unsigned int> N;
         // for each vertex get the colors of its neighbors
         for (auto jval : vertices.at((unsigned long) i)->getNeighbors()) {
-            if (jval < i+1) {
-                // store colors of neighbors in N
-                N.push_back(vertices.at((unsigned long) (jval-1))->getColor());
+            if (std::find(N.begin(), N.end(), vertices.at(jval-1)->getColor()) == N.end()) {
+                // store colors of neighbors in N if not stored yet
+                N.push_back(vertices.at(jval-1)->getColor());
             }
             // if neighbor (j) is greater than current vertex (i), break the inner for loop,
             // cause neighbors are sorted and greater ones have not been colored yet
