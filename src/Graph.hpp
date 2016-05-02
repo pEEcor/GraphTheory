@@ -29,36 +29,39 @@ public:
 
     static Graph* getGraphFromStream(std::ifstream &);
     static Graph* getRandomGraph(unsigned int numOfKnots, float EdgeProb);
-    int getMaxDeg() const;
-    unsigned long getNumberOfVertices() const;
+    auto getMaxDeg() const -> unsigned int;
+    auto getNumberOfVertices() const -> unsigned int;
     auto getNumberOfVerticesWithDeg(const int) const -> unsigned int;
-    double getAverageDeg() const;
-    unsigned long getNumberOfVerticesWithoutNeighbors() const;
+    auto getAverageDeg() const -> float;
+    auto getNumberOfVerticesWithoutNeighbors() const -> unsigned int;
     auto getTriangles() const -> std::vector<std::vector<unsigned int>*>*;
-    unsigned int getNumberOfK3() const;
+    // returns the number of triangles within the graph
+    auto getNumberOfK3() const -> unsigned int;
     auto getNumberOfK4() const -> unsigned int;
     
     // apply the greedy coloring algorithm to the graph and store corresponding
     // color into each node
-    void applyGreedyColoring();
+    auto applyGreedyColoring() -> void;
     
     // apply the greedy coloring algorithm to the graph and store corresponding
     // color into each node, using sequence to apply the algorithm in a given
     // order
-    void applyGreedyColoringWithSequence(std::vector<unsigned int> &);
+    auto applyGreedyColoringWithSequence(std::vector<unsigned int> &) -> void;
     
     // return the amount of colors needed for the greedy coloring
-    unsigned int getNumberOfColors() const;
+    auto getNumberOfColors() const -> unsigned int;
     
     // this just approximates the minimum number of colors, by applying the
     // greedy algorithm n (100 default) times using a random sequence of vertices each
     // time
-    unsigned int getMinNumberOfColors(unsigned int n = 100);
+    auto getMinNumberOfColors(unsigned int n = 100) -> unsigned int;
     
 
 private:
     // set colors back to 0
     void eraseColoring();
+    // return pointer to a vertex
+    auto getVertex(unsigned int number) const -> Vertex*;
     //vector containing
     std::vector<Vertex*> vertices;
 };

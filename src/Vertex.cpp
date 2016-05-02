@@ -9,7 +9,7 @@
 #include "Vertex.hpp"
 
 // constructor
-Vertex::Vertex(const int number, const std::vector<int> &neighbors) : number((unsigned long) number), neighbors(neighbors) , color(0) {}
+Vertex::Vertex(const int number, const std::vector<int> &neighbors) : number( number), neighbors(neighbors) , color(0) {}
 
 // destructor
 Vertex::~Vertex() {}

@@ -29,7 +29,7 @@ public:
     
 private:
     std::vector<int> neighbors;
-    unsigned long number;
+    unsigned int number;
     unsigned int color;
 };
 
