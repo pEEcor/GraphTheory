@@ -344,3 +344,41 @@ auto Graph::getVertex(unsigned int number) const -> Vertex* {
     return NULL;
 }
 
+auto Graph::sizeOfMaxConnectedComponent() const -> unsigned int {
+    // apply a breadth-first search as long as all vertices haven't beed found
+    // position to indicate current root of breadth-first search
+    unsigned int pos{0};
+    // vector to store information, which vertex has beed visited during search
+    std::vector<bool> visited(getNumberOfVertices(), false);
+    // search queue
+    std::queue<unsigned int> Q;
+    
+    while ( pos != getNumberOfVertices()) {
+        // determine start position for breadth-first search
+        unsigned int counter{pos};
+        for (auto i : visited) {
+            if (i == true) {
+                counter++;
+            }
+        }
+        pos += counter;
+        Q.push(pos);
+        visited.at(pos) = true;
+        // start breadth-first search at pos
+        while (!Q.empty()) {
+            auto currentNeighbors = getVertex(Q.front())->getNeighbors();
+            Q.pop();
+            // add all neighbors to the queue that have not been visited
+            for (auto neighbor : currentNeighbors) {
+                // if not visited yet
+                if (!(visited.at(neighbor))) {
+                    Q.push(neighbor);
+                    visited.at(neighbor) = true;
+                }
+            }
+        }
+    }
+    
+    
+    return 1;
+}

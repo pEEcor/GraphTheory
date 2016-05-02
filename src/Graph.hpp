@@ -14,7 +14,7 @@
 #include <fstream>
 #include <regex>
 #include <vector>
-#include <array>
+#include <queue>
 #include <random>
 #include <algorithm>
 
@@ -56,11 +56,14 @@ public:
     // time
     auto getMinNumberOfColors(unsigned int n = 100) -> unsigned int;
     
+    // return the number of nodes within the biggest connected component
+    auto sizeOfMaxConnectedComponent() const -> unsigned int;
+    
 
 private:
     // set colors back to 0
     void eraseColoring();
-    // return pointer to a vertex
+    // get pointer to a vertex by its number
     auto getVertex(unsigned int number) const -> Vertex*;
     //vector containing
     std::vector<Vertex*> vertices;
