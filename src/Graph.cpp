@@ -264,18 +264,17 @@ void Graph::applyGreedyColoringWithSequence(std::vector<unsigned int> &seq) {
     // erase the current coloring first
     eraseColoring();
     // traverse trough each vertex of the graph
-    for (int i = 0; i < vertices.size(); i++) {
+    for (auto i : seq) {
         std::vector<unsigned int> N;
         // for each vertex get the colors of its neighbors
-        for (auto jval : vertices.at(seq.at((unsigned long) i))->getNeighbors()) {
-            if (jval < i+1) {
-                // store colors of neighbors in N
-                N.push_back(vertices.at(seq.at((unsigned long) (jval-1)))->getColor());
-            }
-            // if neighbor (j) is greater than current vertex (i), break the inner for loop,
-            // cause neighbors are sorted and greater ones have not been colored yet
-            if (jval > i+1) {
-                break;
+        for (auto jval : vertices.at(i)->getNeighbors()) {
+            // check if neighbor has already been colored and add color to N
+            if (vertices.at(jval-1)->getColor() != 0) {
+                // check if color is not in N yet
+                if (std::find(N.begin(), N.end(), vertices.at(jval-1)->getColor()) == N.end()) {
+                    // store colors of neighbors in N if not stored yet
+                    N.push_back(vertices.at(jval-1)->getColor());
+                }
             }
         }
         // determine the minimum color in N which can be assigned to the current
