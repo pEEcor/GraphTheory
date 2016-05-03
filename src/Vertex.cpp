@@ -51,3 +51,11 @@ void Vertex::addNeigbor(unsigned int newNeighbor) {
         neighbors.push_back(newNeighbor);
     }
 }
+
+auto Vertex::setVisited(bool a) -> void {
+    visited = a;
+}
+
+auto Vertex::getVisited() const -> bool {
+    return visited;
+}

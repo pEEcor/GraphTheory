@@ -26,11 +26,16 @@ public:
     bool checkForNeighbor(int vertex) const;
     unsigned int getColor() const;
     void setColor(unsigned int color);
+    // setter for visiting status
+    auto setVisited(bool) -> void;
+    // getter for visition status
+    auto getVisited() const -> bool;
     
 private:
     std::vector<int> neighbors;
     unsigned int number;
     unsigned int color;
+    bool visited = false;
 };
 
 #endif /* Vertex_hpp */
