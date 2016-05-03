@@ -328,7 +328,7 @@ auto Graph::getMinNumberOfColors(unsigned int n) -> unsigned int{
     return minNumOfColors;
 }
 
-void Graph::eraseColoring() {
+auto Graph::eraseColoring() -> void{
     for (auto ival : vertices) {
         ival->setColor(0);
     }

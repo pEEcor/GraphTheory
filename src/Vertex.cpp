@@ -15,20 +15,20 @@ Vertex::Vertex(const int number, const std::vector<int> &neighbors) : number( nu
 Vertex::~Vertex() {}
 
 // public method, which returns the number of neighbours
-int Vertex::getDegree() const {
+auto Vertex::getDegree() const -> unsigned int{
     return int(neighbors.size());
 }
 
 // public method, which return a vector of neighbours
-std::vector<int>& Vertex::getNeighbors() {
+auto Vertex::getNeighbors() -> std::vector<int>&{
     return neighbors;
 }
 
-unsigned long Vertex::getNumber() const {
+auto Vertex::getNumber() const -> unsigned int{
     return number;
 }
 
-bool Vertex::checkForNeighbor(int vertex) const {
+auto Vertex::checkForNeighbor(int vertex) const ->bool {
     for (auto ival : neighbors) {
         if (vertex == ival) {
             return true;
@@ -37,15 +37,15 @@ bool Vertex::checkForNeighbor(int vertex) const {
     return false;
 };
 
-unsigned int Vertex::getColor() const {
+auto Vertex::getColor() const -> unsigned int{
     return color;
 }
 
-void Vertex::setColor(unsigned int color) {
+auto Vertex::setColor(unsigned int color) -> void {
     this->color = color;
 }
 
-void Vertex::addNeigbor(unsigned int newNeighbor) {
+auto Vertex::addNeigbor(unsigned int newNeighbor) -> void {
     auto result = std::find(neighbors.begin(), neighbors.end(), newNeighbor);
     if (result == neighbors.end()) {
         neighbors.push_back(newNeighbor);

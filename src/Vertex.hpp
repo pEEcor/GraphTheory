@@ -19,13 +19,13 @@ public:
     virtual ~Vertex();
 
     // methods
-    int getDegree() const;
-    std::vector<int>& getNeighbors();
-    void addNeigbor(unsigned int);
-    unsigned long getNumber() const;
-    bool checkForNeighbor(int vertex) const;
-    unsigned int getColor() const;
-    void setColor(unsigned int color);
+    auto getDegree() const -> unsigned int;
+    auto getNeighbors() -> std::vector<int>&;
+    auto addNeigbor(unsigned int) -> void;
+    auto getNumber() const -> unsigned int;
+    auto checkForNeighbor(int vertex) const -> bool;
+    auto getColor() const -> unsigned int;
+    auto setColor(unsigned int color) -> void;
     // setter for visiting status
     auto setVisited(bool) -> void;
     // getter for visition status

@@ -61,7 +61,7 @@ public:
 
 private:
     // set colors back to 0
-    void eraseColoring();
+    auto eraseColoring() -> void;
     // set visiting status back to false
     auto eraseVisiting() -> void;
     // get pointer to a vertex by its number
