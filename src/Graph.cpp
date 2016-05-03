@@ -336,49 +336,59 @@ void Graph::eraseColoring() {
 }
 
 auto Graph::getVertex(unsigned int number) const -> Vertex* {
-    for (auto i : vertices) {
-        if (i->getNumber() == number) {
-            return i;
-        }
+    if (deletionHadBeenApplied) {
+        return *std::find_if(vertices.begin(), vertices.end(), [number] (Vertex* v)->bool {return v->getNumber() == number;});
     }
-    return NULL;
+    else {
+        return vertices.at(number -1);
+    }
 }
 
-auto Graph::sizeOfMaxConnectedComponent() const -> unsigned int {
+auto Graph::sizeOfMaxConnectedComponent() -> unsigned int {
     // apply a breadth-first search as long as all vertices haven't beed found
-    // position to indicate current root of breadth-first search
-    unsigned int pos{0};
-    // vector to store information, which vertex has beed visited during search
-    std::vector<bool> visited(getNumberOfVertices(), false);
+    // erase old visiting information first
+    eraseVisiting();
+    // var to store number of connected component size
+    unsigned int sizeOfConnectedComponent{0};
+    unsigned int VertexCounter{0};
     // search queue
     std::queue<unsigned int> Q;
     
-    while ( pos != getNumberOfVertices()) {
-        // determine start position for breadth-first search
-        unsigned int counter{pos};
-        for (auto i : visited) {
-            if (i == true) {
-                counter++;
-            }
-        }
-        pos += counter;
-        Q.push(pos);
-        visited.at(pos) = true;
-        // start breadth-first search at pos
-        while (!Q.empty()) {
-            auto currentNeighbors = getVertex(Q.front())->getNeighbors();
-            Q.pop();
-            // add all neighbors to the queue that have not been visited
-            for (auto neighbor : currentNeighbors) {
-                // if not visited yet
-                if (!(visited.at(neighbor))) {
-                    Q.push(neighbor);
-                    visited.at(neighbor) = true;
+    // traverse though all the vertices, order isnt necessary here
+    for (unsigned int i{0}; i < vertices.size(); i++) {
+        // if vertex had not been visited yet, start a new search
+        if (vertices.at(i)->getVisited() == false) {
+            Q.push(i);
+            vertices.at(i)->setVisited(true);
+            // breadth-first search with vertex at i
+            while (!Q.empty()) {
+                auto currentNeighbors = vertices.at(Q.front())->getNeighbors();
+                Q.pop();
+                VertexCounter++;
+                // add all neighbors to the queue that have not been visited
+                for (auto neighbor : currentNeighbors) {
+                    // if not visited yet
+                    if (!(getVertex(neighbor)->getVisited())) {
+                        Q.push(neighbor);
+                         getVertex(neighbor)->setVisited(true);
+                    }
                 }
             }
+            // check if current connected component is bigger than the previous one
+            if (VertexCounter > sizeOfConnectedComponent) {
+                sizeOfConnectedComponent = VertexCounter;
+            }
+            // reset vertexCounter
+            VertexCounter = 0;
         }
     }
-    
-    
-    return 1;
+    // at least every single vertex is connected to itself, thus the smallest connected
+    // component is one
+    return sizeOfConnectedComponent + 1;
+}
+
+auto Graph::eraseVisiting() -> void {
+    for (auto vertex : vertices) {
+        vertex->setVisited(false);
+    }
 }

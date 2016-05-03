@@ -57,14 +57,18 @@ public:
     auto getMinNumberOfColors(unsigned int n = 100) -> unsigned int;
     
     // return the number of nodes within the biggest connected component
-    auto sizeOfMaxConnectedComponent() const -> unsigned int;
-    
+    auto sizeOfMaxConnectedComponent() -> unsigned int;
 
 private:
     // set colors back to 0
     void eraseColoring();
+    // set visiting status back to false
+    auto eraseVisiting() -> void;
     // get pointer to a vertex by its number
     auto getVertex(unsigned int number) const -> Vertex*;
+    
+    // set to 0 if a deletion of a vertex had beed applied to the graph
+    bool deletionHadBeenApplied{false};
     //vector containing
     std::vector<Vertex*> vertices;
 };

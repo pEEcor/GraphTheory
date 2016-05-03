@@ -165,10 +165,16 @@ bool Menu::_optionHandler(int choice) {
         }
             return true;
         case 10: {
+            std::cout << "Number of biggest connected component: ";
+            std::cout << graph->sizeOfMaxConnectedComponent() << std::endl;
+        }
+            return true;
+        case 11: {
             for (int i = 1; i < 10; i++) {
                 _optionHandler(i);
             }
         }
+            return true;
         default: {
             std::cout << "Invalid choice!" << std::endl;
         }
