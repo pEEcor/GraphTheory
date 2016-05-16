@@ -64,6 +64,8 @@ Graph* Graph::getGraphFromStream(std::ifstream &file) {
     return new Graph(vertices);
 }
 
+// FIXME need better random distribution
+// average deg of n=10000 and p=0.1 is only 908 instead of 999
 Graph *Graph::getRandomGraph(unsigned int numOfKnots, float EdgeProb) {
     // generate vertices vector
     std::vector<Vertex*> vertices;

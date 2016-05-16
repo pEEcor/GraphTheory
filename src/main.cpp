@@ -8,7 +8,6 @@
 
 #include <iostream>
 #include "Graph.hpp"
-#include "Menu.hpp"
 #include <fstream>
 
 auto exercise15() -> void;
@@ -23,7 +22,7 @@ int main(int argc, const char * argv[]) {
     
     //exercise15();
     //exercise25();
-    exercise34();
+    //exercise34();
     //exercise45();
     //exercise54();
     
@@ -138,7 +137,24 @@ auto exercise34() -> void {
 }
 
 auto exercise45() -> void {
-
+    
+    for(double i = 1e-3; i < 1; i *=10) {
+        
+        Graph *graph = Graph::getRandomGraph(10000, i);
+        
+        // Durchschnittsgrad
+        std::cout << "Average degree: ";
+        std::cout << graph->getAverageDeg() << std::endl;
+        // Dreiecke
+        std::cout << "Number of K3: ";
+        std::cout << graph->getNumberOfK3() << std::endl;
+        // Farben
+        int result = graph->getMinNumberOfColors(100);
+        std::cout << "Approximation für chi(G) with 100 random seq: ";
+        std::cout << result << std::endl;
+        
+        delete graph;
+    }
 }
 
 auto exercise54() -> void {

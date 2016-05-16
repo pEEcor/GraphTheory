@@ -10,7 +10,6 @@
 		5C6588991CCE6B670074C4B6 /* Graph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C6588941CCE6B670074C4B6 /* Graph.cpp */; };
 		5C65889A1CCE6B670074C4B6 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C6588961CCE6B670074C4B6 /* main.cpp */; };
 		5C65889B1CCE6B670074C4B6 /* Vertex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C6588971CCE6B670074C4B6 /* Vertex.cpp */; };
-		5CC4D2021CD611AA004B8361 /* Menu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4D2001CD611AA004B8361 /* Menu.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,8 +31,6 @@
 		5C6588971CCE6B670074C4B6 /* Vertex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vertex.cpp; sourceTree = "<group>"; };
 		5C6588981CCE6B670074C4B6 /* Vertex.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Vertex.hpp; sourceTree = "<group>"; };
 		5CBEBA941CC793E9009A63C3 /* graph34.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = graph34.txt; sourceTree = "<group>"; };
-		5CC4D2001CD611AA004B8361 /* Menu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Menu.cpp; sourceTree = "<group>"; };
-		5CC4D2011CD611AA004B8361 /* Menu.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Menu.hpp; sourceTree = "<group>"; };
 		5CEB3B9D1CBEB322006998E9 /* GraphTheory */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GraphTheory; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CF8188B1CD0B36E00F8FCD6 /* onlinetest.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = onlinetest.txt; sourceTree = "<group>"; };
 		5CF9C0A11CC2AEE300D6EDB9 /* graph15.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = graph15.txt; sourceTree = "<group>"; };
@@ -59,8 +56,6 @@
 				5C6588961CCE6B670074C4B6 /* main.cpp */,
 				5C6588971CCE6B670074C4B6 /* Vertex.cpp */,
 				5C6588981CCE6B670074C4B6 /* Vertex.hpp */,
-				5CC4D2001CD611AA004B8361 /* Menu.cpp */,
-				5CC4D2011CD611AA004B8361 /* Menu.hpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -152,7 +147,6 @@
 			files = (
 				5C65889B1CCE6B670074C4B6 /* Vertex.cpp in Sources */,
 				5C65889A1CCE6B670074C4B6 /* main.cpp in Sources */,
-				5CC4D2021CD611AA004B8361 /* Menu.cpp in Sources */,
 				5C6588991CCE6B670074C4B6 /* Graph.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
