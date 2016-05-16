@@ -23,7 +23,7 @@ int main(int argc, const char * argv[]) {
     
     //exercise15();
     //exercise25();
-    //exercise34();
+    exercise34();
     //exercise45();
     //exercise54();
     
@@ -102,7 +102,39 @@ auto exercise25() -> void {
 }
 
 auto exercise34() -> void {
-
+    Graph* graph = NULL;
+    
+    // create file stream and open graph15.txt
+    std::ifstream file;
+    std::cout << "Opening File...";
+    file.open("graph34.txt", std::ios::in);
+    std::cout << "Done" << std::endl;
+    
+    // check if opening the file was successfull
+    if(file.good()) {
+        std::cout << "Creating Graph...";
+        graph = Graph::getGraphFromStream(file);
+        std::cout << "Done" << std::endl;
+        // close file
+        if(file.is_open()) {
+            std::cout << "Closing File...";
+            file.close();
+            std::cout << "Done" << std::endl;
+        }
+    }
+    else {
+        std::cerr << "Invalid Filename" << std::endl;
+    }
+    
+    graph->applyGreedyColoring();
+    if (graph->getNumberOfColors()) {
+        std::cout << "Colors needed for Greedy coloring (one run): ";
+        std::cout << graph->getNumberOfColors() << std::endl;
+    }
+    
+    int result = graph->getMinNumberOfColors(1000);
+    std::cout << "Approximation für chi(G) with 1000 random seq: ";
+    std::cout << result << std::endl;
 }
 
 auto exercise45() -> void {
