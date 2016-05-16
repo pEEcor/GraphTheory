@@ -8,8 +8,6 @@
 
 #include "Menu.hpp"
 
-
-
 void Menu::show() {
     _init();
     _start();
@@ -32,9 +30,21 @@ void Menu::_init() {
 
 void Menu::_start() {
     _printMenu(graphTypes);
-    while(_dataTypeHandler() != false) {
-        _printMenu(options);
-        while (_optionHandler() != false) {
+    bool active{true};
+    while(active != false) {
+        auto choice = _graphTypeHandler();
+        if (std::get<0>(choice) == false) {
+            break;
+        }
+
+        // single graph operations
+        if (std::get<1>(choice) == 1 || std::get<1>(choice) == 2) {
+            auto option = _optionHandler();
+            
+        }
+        // operations on multiple graphs
+        else if (std::get<1>(choice) == 3) {
+            
         }
     }
 }
@@ -43,14 +53,14 @@ void Menu::_end() {
     
 }
 
-bool Menu::_dataTypeHandler() {
+auto Menu::_graphTypeHandler() -> std::tuple<bool, int> {
     unsigned int choice{1};
     std::cout << "Graph Source: ";
     std::cin >> choice;
     
     switch (choice) {
         case 0:
-            return false;
+            return std::make_tuple(false, 0);
             
         case 1: {
             std::string name;
@@ -79,7 +89,7 @@ bool Menu::_dataTypeHandler() {
                 std::cerr << "Invalid Filename" << std::endl;
             }
         };
-            return true;
+            return std::make_tuple(true, 1);
             
         case 2: {
             // generating random Graph
@@ -93,12 +103,17 @@ bool Menu::_dataTypeHandler() {
             graph = Graph::getRandomGraph(vertices, probability);
             std::cout << "Done" << std::endl;
         }
-            return true;
+            return std::make_tuple(true, 2);
+        
+        case 3: {
+            
+        }
+            return std::make_tuple(true, 3);
             
         default: {
             std::cout << "Invalid choice!" << std::endl;
         }
-            return true;
+            return std::make_tuple(true, -1);;
     }
 }
 

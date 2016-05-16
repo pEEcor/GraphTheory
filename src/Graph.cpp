@@ -125,7 +125,7 @@ auto Graph::getAverageDeg() const -> float{
     for (auto ival : vertices) {
         numOfEdges += ival->getDegree();
     }
-    return numOfEdges / getNumberOfVertices();
+    return numOfEdges / (float)getNumberOfVertices();
 }
 
 auto Graph::getNumberOfVerticesWithoutNeighbors() const -> unsigned int {

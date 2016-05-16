@@ -28,14 +28,16 @@ private:
     void _end();
     unsigned int _windowCol = 0;
     unsigned int _windowRow = 0;
+    void _printMenu(const std::vector<std::string>&);
+    auto _graphTypeHandler() -> std::tuple<bool, int>;
+    bool _optionHandler(int choice = -1);
+    
     // selection for graph types
-    std::vector<std::string> graphTypes {"Exit", "Graph from File", "Random Graph"};
+    std::vector<std::string> graphTypes {"Exit", "Graph from File", "Random Graph", "Exercises"};
     // selection for options
     std::vector<std::string> options {"Exit", "MaxDeg", "AverageDeg", "NumOfVertices", "NumberOfVerticesWithDeg", "NumOfVerticesWithoutNeighbors", "NumOfK3", "NumberOfK4", "Greedy Coloring", "Approximation für chi(G)", "sizeOfMaxConnectedComponent", "Apply all"};
-    void _printMenu(const std::vector<std::string>&);
-    
-    bool _dataTypeHandler();
-    bool _optionHandler(int choice = -1);
+    // selection for exercises
+    std::vector<std::string> exercises {"Exit", "5.4b"};
     
     Graph* graph = NULL;
 };
