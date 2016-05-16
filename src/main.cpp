@@ -63,7 +63,42 @@ auto exercise15() -> void {
 }
 
 auto exercise25() -> void {
-
+    
+    Graph* graph = NULL;
+    
+    // create file stream and open graph15.txt
+    std::ifstream file;
+    std::cout << "Opening File...";
+    file.open("graph25.txt", std::ios::in);
+    std::cout << "Done" << std::endl;
+    
+    // check if opening the file was successfull
+    if(file.good()) {
+        std::cout << "Creating Graph...";
+        graph = Graph::getGraphFromStream(file);
+        std::cout << "Done" << std::endl;
+        // close file
+        if(file.is_open()) {
+            std::cout << "Closing File...";
+            file.close();
+            std::cout << "Done" << std::endl;
+        }
+    }
+    else {
+        std::cerr << "Invalid Filename" << std::endl;
+    }
+    
+    std::cout << "Number of vertices: ";
+    std::cout << graph->getNumberOfVertices() << std::endl;
+    
+    std::cout << "Average degree: ";
+    std::cout << graph->getAverageDeg() << std::endl;
+    
+    std::cout << "Number of vertices without neighbors: ";
+    std::cout << graph->getNumberOfVerticesWithoutNeighbors() << std::endl;
+    
+    std::cout << "Number of K3: ";
+    std::cout << graph->getNumberOfK3() << std::endl;
 }
 
 auto exercise34() -> void {
