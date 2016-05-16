@@ -11,17 +11,67 @@
 #include "Menu.hpp"
 #include <fstream>
 
+auto exercise15() -> void;
+auto exercise25() -> void;
+auto exercise34() -> void;
+auto exercise45() -> void;
 auto exercise54() -> void;
+
 
 int main(int argc, const char * argv[]) {
     std::cout << "Starting...\n\n";
     
-    // Menu menu;
-    // menu.show();
+    //exercise15();
+    //exercise25();
+    //exercise34();
+    //exercise45();
+    //exercise54();
     
-    exercise54();
+    std::cout << "DONE" << std::endl;
     
     return 0;
+}
+
+auto exercise15() -> void {
+    
+    Graph* graph = NULL;
+    
+    // create file stream and open graph15.txt
+    std::ifstream file;
+    std::cout << "Opening File...";
+    file.open("graph15.txt", std::ios::in);
+    std::cout << "Done" << std::endl;
+    
+    // check if opening the file was successfull
+    if(file.good()) {
+        std::cout << "Creating Graph...";
+        graph = Graph::getGraphFromStream(file);
+        std::cout << "Done" << std::endl;
+        // close file
+        if(file.is_open()) {
+            std::cout << "Closing File...";
+            file.close();
+            std::cout << "Done" << std::endl;
+        }
+    }
+    else {
+        std::cerr << "Invalid Filename" << std::endl;
+    }
+    
+    std::cout << "Greatest degree: ";
+    std::cout << graph->getMaxDeg() << std::endl;
+}
+
+auto exercise25() -> void {
+
+}
+
+auto exercise34() -> void {
+
+}
+
+auto exercise45() -> void {
+
 }
 
 auto exercise54() -> void {
