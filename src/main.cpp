@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include "Graph.hpp"
+#include "WeightedGraph.hpp"
 #include <fstream>
 
 auto exercise15() -> void;
@@ -15,16 +16,17 @@ auto exercise25() -> void;
 auto exercise34() -> void;
 auto exercise45() -> void;
 auto exercise54() -> void;
-
+auto exercise65() -> void;
 
 int main(int argc, const char * argv[]) {
     std::cout << "Starting...\n\n";
     
-    //exercise15();
+    exercise15();
     //exercise25();
     //exercise34();
     //exercise45();
     //exercise54();
+    exercise65();
     
     std::cout << "DONE" << std::endl;
     
@@ -170,4 +172,40 @@ auto exercise54() -> void {
         std::cout << "Biggest connected component: " << graph->sizeOfMaxConnectedComponent() << std::endl;
         delete graph;
         }
+}
+
+auto exercise65() -> void {
+    
+    WeightedGraph* graph = NULL;
+    
+    // create file stream and open graph15.txt
+    std::ifstream file;
+    std::cout << "Opening File...";
+    file.open("graph65.txt", std::ios::in);
+    std::cout << "Done" << std::endl;
+    
+    // check if opening the file was successfull
+    if(file.good()) {
+        std::cout << "Creating Graph...";
+        graph = WeightedGraph::getGraphFromStream(file);
+        std::cout << "Done" << std::endl;
+        // close file
+        if(file.is_open()) {
+            std::cout << "Closing File...";
+            file.close();
+            std::cout << "Done" << std::endl;
+        }
+    }
+    else {
+        std::cerr << "Invalid Filename" << std::endl;
+    }
+    
+    double result = graph->getShortestPath(1, 2);
+    std::cout << "Shortest path from 1 to 2 costs: " << result << std::endl;
+    
+    std::cout << "PathChain: ";
+    for (auto vertex : *graph->getPathChain(1, 2)) {
+        std::cout << vertex << " ";
+    }
+    std::cout << std::endl;
 }

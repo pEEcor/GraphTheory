@@ -10,6 +10,7 @@
 		5C6588991CCE6B670074C4B6 /* Graph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C6588941CCE6B670074C4B6 /* Graph.cpp */; };
 		5C65889A1CCE6B670074C4B6 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C6588961CCE6B670074C4B6 /* main.cpp */; };
 		5C65889B1CCE6B670074C4B6 /* Vertex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C6588971CCE6B670074C4B6 /* Vertex.cpp */; };
+		5CF2C4A81CEB406B008509CE /* WeightedGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5CF2C4A61CEB406B008509CE /* WeightedGraph.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -30,8 +31,12 @@
 		5C6588961CCE6B670074C4B6 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		5C6588971CCE6B670074C4B6 /* Vertex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vertex.cpp; sourceTree = "<group>"; };
 		5C6588981CCE6B670074C4B6 /* Vertex.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Vertex.hpp; sourceTree = "<group>"; };
+		5C943D741CEE1F7500E8E83B /* testgraph.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testgraph.txt; sourceTree = "<group>"; };
 		5CBEBA941CC793E9009A63C3 /* graph34.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = graph34.txt; sourceTree = "<group>"; };
+		5CD8B88A1CEA171D0025C0B1 /* graph65.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = graph65.txt; sourceTree = "<group>"; };
 		5CEB3B9D1CBEB322006998E9 /* GraphTheory */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GraphTheory; sourceTree = BUILT_PRODUCTS_DIR; };
+		5CF2C4A61CEB406B008509CE /* WeightedGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WeightedGraph.cpp; sourceTree = "<group>"; };
+		5CF2C4A71CEB406B008509CE /* WeightedGraph.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = WeightedGraph.hpp; sourceTree = "<group>"; };
 		5CF8188B1CD0B36E00F8FCD6 /* onlinetest.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = onlinetest.txt; sourceTree = "<group>"; };
 		5CF9C0A11CC2AEE300D6EDB9 /* graph15.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = graph15.txt; sourceTree = "<group>"; };
 		5CF9C0A21CC2AEE300D6EDB9 /* graph25.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = graph25.txt; sourceTree = "<group>"; };
@@ -51,11 +56,13 @@
 		5C6588921CCE6B4D0074C4B6 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				5C6588941CCE6B670074C4B6 /* Graph.cpp */,
-				5C6588951CCE6B670074C4B6 /* Graph.hpp */,
 				5C6588961CCE6B670074C4B6 /* main.cpp */,
 				5C6588971CCE6B670074C4B6 /* Vertex.cpp */,
 				5C6588981CCE6B670074C4B6 /* Vertex.hpp */,
+				5C6588941CCE6B670074C4B6 /* Graph.cpp */,
+				5C6588951CCE6B670074C4B6 /* Graph.hpp */,
+				5CF2C4A61CEB406B008509CE /* WeightedGraph.cpp */,
+				5CF2C4A71CEB406B008509CE /* WeightedGraph.hpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -80,10 +87,12 @@
 		5CEB3BAE1CBEB4B9006998E9 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				5CD8B88A1CEA171D0025C0B1 /* graph65.txt */,
 				5CF9C0A11CC2AEE300D6EDB9 /* graph15.txt */,
 				5CF9C0A21CC2AEE300D6EDB9 /* graph25.txt */,
 				5CBEBA941CC793E9009A63C3 /* graph34.txt */,
 				5CF8188B1CD0B36E00F8FCD6 /* onlinetest.txt */,
+				5C943D741CEE1F7500E8E83B /* testgraph.txt */,
 			);
 			name = Data;
 			path = Build/Products/Debug;
@@ -146,6 +155,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C65889B1CCE6B670074C4B6 /* Vertex.cpp in Sources */,
+				5CF2C4A81CEB406B008509CE /* WeightedGraph.cpp in Sources */,
 				5C65889A1CCE6B670074C4B6 /* main.cpp in Sources */,
 				5C6588991CCE6B670074C4B6 /* Graph.cpp in Sources */,
 			);

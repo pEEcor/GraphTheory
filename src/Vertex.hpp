@@ -19,8 +19,12 @@ public:
     virtual ~Vertex();
 
     // methods
+    auto setWeights(const std::vector<float> &) -> void;
+    // ask vertex for cost to one of its neighbors, returns -1 if not a neighbor
+    auto getWeightTo(unsigned int other) -> float;
+    
     auto getDegree() const -> unsigned int;
-    auto getNeighbors() -> std::vector<int>&;
+    auto getNeighbors() -> std::vector<int> &;
     auto addNeigbor(unsigned int) -> void;
     auto getNumber() const -> unsigned int;
     auto checkForNeighbor(int vertex) const -> bool;
@@ -31,8 +35,11 @@ public:
     // getter for visition status
     auto getVisited() const -> bool;
     
+    unsigned int predecessor{0};
+    
 private:
     std::vector<int> neighbors;
+    std::vector<float> weights;
     unsigned int number;
     unsigned int color;
     bool visited = false;

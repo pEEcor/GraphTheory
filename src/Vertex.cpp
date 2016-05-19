@@ -9,10 +9,32 @@
 #include "Vertex.hpp"
 
 // constructor
-Vertex::Vertex(const int number, const std::vector<int> &neighbors) : number( number), neighbors(neighbors) , color(0) {}
+Vertex::Vertex(const int number, const std::vector<int> &neighbors) : number(number), neighbors(neighbors) , color(0) {}
 
 // destructor
 Vertex::~Vertex() {}
+
+auto Vertex::setWeights(const std::vector<float> &weights) -> void {
+    if (neighbors.size() != weights.size()) {
+        // do some error stuff
+    }
+    else {
+        for (int i = 0; i < weights.size(); i++) {
+            this->weights.push_back(weights.at(i));
+        }
+    }
+}
+
+auto Vertex::getWeightTo(unsigned int other) -> float {
+    int i{0};
+    for (auto neighbor : neighbors) {
+        if (other == neighbor) {
+            return weights.at(i);
+        }
+        i++;
+    }
+    return -1;
+}
 
 // public method, which returns the number of neighbours
 auto Vertex::getDegree() const -> unsigned int{

@@ -14,6 +14,7 @@
 #include <fstream>
 #include <regex>
 #include <vector>
+#include <set>
 #include <queue>
 #include <random>
 #include <algorithm>
@@ -58,6 +59,12 @@ public:
     
     // return the number of nodes within the biggest connected component
     auto sizeOfMaxConnectedComponent() -> unsigned int;
+    
+    // return the cost for the shortest path from source vertex to desination vertex
+    auto getShortestPath(unsigned int source, unsigned int destination) -> double;
+    
+    // get path chain
+    auto getPathChain(unsigned int source, unsigned int destination) -> std::vector<unsigned int>*;
 
 private:
     // set colors back to 0
