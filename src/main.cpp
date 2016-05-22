@@ -17,16 +17,18 @@ auto exercise34() -> void;
 auto exercise45() -> void;
 auto exercise54() -> void;
 auto exercise65() -> void;
+auto exercise75() -> void;
 
 int main(int argc, const char * argv[]) {
     std::cout << "Starting...\n\n";
     
-    exercise15();
+    //exercise15();
     //exercise25();
     //exercise34();
     //exercise45();
     //exercise54();
-    exercise65();
+    //exercise65();
+    exercise75();
     
     std::cout << "DONE" << std::endl;
     
@@ -208,4 +210,36 @@ auto exercise65() -> void {
         std::cout << vertex << " ";
     }
     std::cout << std::endl;
+}
+
+auto exercise75() -> void {
+    
+    WeightedGraph* graph = NULL;
+    
+    // create file stream and open graph15.txt
+    std::ifstream file;
+    std::cout << "Opening File...";
+    file.open("testgraph.txt", std::ios::in);
+    std::cout << "Done" << std::endl;
+    
+    // check if opening the file was successfull
+    if(file.good()) {
+        std::cout << "Creating Graph...";
+        graph = WeightedGraph::getGraphFromStream(file);
+        std::cout << "Done" << std::endl;
+        // close file
+        if(file.is_open()) {
+            std::cout << "Closing File...";
+            file.close();
+            std::cout << "Done" << std::endl;
+        }
+    }
+    else {
+        std::cerr << "Invalid Filename" << std::endl;
+    }
+    
+    auto result = graph->getWeightOfMinimalSpanningTree();
+    std::cout << "Weight of minimal spanning tree: " << result << std::endl;
+    
+    
 }

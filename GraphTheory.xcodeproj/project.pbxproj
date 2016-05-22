@@ -31,6 +31,7 @@
 		5C6588961CCE6B670074C4B6 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		5C6588971CCE6B670074C4B6 /* Vertex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vertex.cpp; sourceTree = "<group>"; };
 		5C6588981CCE6B670074C4B6 /* Vertex.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Vertex.hpp; sourceTree = "<group>"; };
+		5C7B34461CEF2BED00530CA6 /* graph75.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = graph75.txt; sourceTree = "<group>"; };
 		5C943D741CEE1F7500E8E83B /* testgraph.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testgraph.txt; sourceTree = "<group>"; };
 		5CBEBA941CC793E9009A63C3 /* graph34.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = graph34.txt; sourceTree = "<group>"; };
 		5CD8B88A1CEA171D0025C0B1 /* graph65.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = graph65.txt; sourceTree = "<group>"; };
@@ -87,10 +88,11 @@
 		5CEB3BAE1CBEB4B9006998E9 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				5CD8B88A1CEA171D0025C0B1 /* graph65.txt */,
 				5CF9C0A11CC2AEE300D6EDB9 /* graph15.txt */,
 				5CF9C0A21CC2AEE300D6EDB9 /* graph25.txt */,
 				5CBEBA941CC793E9009A63C3 /* graph34.txt */,
+				5CD8B88A1CEA171D0025C0B1 /* graph65.txt */,
+				5C7B34461CEF2BED00530CA6 /* graph75.txt */,
 				5CF8188B1CD0B36E00F8FCD6 /* onlinetest.txt */,
 				5C943D741CEE1F7500E8E83B /* testgraph.txt */,
 			);

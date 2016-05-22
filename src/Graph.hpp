@@ -65,12 +65,17 @@ public:
     
     // get path chain
     auto getPathChain(unsigned int source, unsigned int destination) -> std::vector<unsigned int>*;
+    
+    // get weight of minimal spanning tree, assuming the entire graph is connected
+    auto getWeightOfMinimalSpanningTree() -> double;
 
 private:
     // set colors back to 0
     auto eraseColoring() -> void;
     // set visiting status back to false
     auto eraseVisiting() -> void;
+    // set predecessor entries of each vertex to 0
+    auto erasePredecessor() -> void;
     // get pointer to a vertex by its number
     auto getVertex(unsigned int number) const -> Vertex*;
     

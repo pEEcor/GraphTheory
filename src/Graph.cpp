@@ -350,13 +350,14 @@ auto Graph::sizeOfMaxConnectedComponent() -> unsigned int {
     // apply a breadth-first search as long as all vertices haven't beed found
     // erase old visiting information first
     eraseVisiting();
+    erasePredecessor();
     // var to store number of connected component size
     unsigned int sizeOfConnectedComponent{0};
     unsigned int VertexCounter{0};
     // search queue
     std::queue<unsigned int> Q;
     
-    // traverse though all the vertices, order isnt necessary here
+    // traverse though all the vertices, order isn't necessary here
     for (unsigned int i{0}; i < vertices.size(); i++) {
         // if vertex had not been visited yet, start a new search
         if (vertices.at(i)->getVisited() == false) {
@@ -364,6 +365,7 @@ auto Graph::sizeOfMaxConnectedComponent() -> unsigned int {
             vertices.at(i)->setVisited(true);
             // breadth-first search with vertex at i
             while (!Q.empty()) {
+                unsigned int v{Q.front()};
                 auto currentNeighbors = vertices.at(Q.front())->getNeighbors();
                 Q.pop();
                 VertexCounter++;
@@ -372,7 +374,8 @@ auto Graph::sizeOfMaxConnectedComponent() -> unsigned int {
                     // if not visited yet
                     if (!(getVertex(neighbor)->getVisited())) {
                         Q.push(neighbor);
-                         getVertex(neighbor)->setVisited(true);
+                        getVertex(neighbor)->setVisited(true);
+                        getVertex(neighbor)->predecessor = vertices.at(v)->getNumber();
                     }
                 }
             }
@@ -395,11 +398,14 @@ auto Graph::eraseVisiting() -> void {
     }
 }
 
+auto Graph::erasePredecessor() -> void {
+    for (auto vertex : vertices) {
+        vertex->predecessor = 0;
+    }
+}
+
 // implementation of dijsktra, can not handle negative weights
 auto Graph::getShortestPath(unsigned int source, unsigned int destination) -> double {
-    
-    unsigned int tmp{0};
-    
     // minDistance vector which will contain the minimum distance from start to every other vertex
     std::vector<float> minDistance(vertices.size()+1, std::numeric_limits<double>::max());
     // distance to source is 0
@@ -427,7 +433,6 @@ auto Graph::getShortestPath(unsigned int source, unsigned int destination) -> do
     return std::numeric_limits<double>::max();
 }
 
-
 auto Graph::getPathChain(unsigned int source, unsigned int destination) -> std::vector<unsigned int>* {
     
     auto result = new std::vector<unsigned int>;
@@ -446,5 +451,10 @@ auto Graph::getPathChain(unsigned int source, unsigned int destination) -> std::
     return result;
 }
 
+auto Graph::getWeightOfMinimalSpanningTree() -> double {
+    // weight
+    double weight{0};
 
+    return weight;
+}
 
