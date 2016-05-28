@@ -15,6 +15,7 @@
 #include <regex>
 #include <vector>
 #include <set>
+#include <map>
 #include <queue>
 #include <random>
 #include <algorithm>
@@ -24,20 +25,45 @@
 class Graph {
 public:
     // constructor
-    Graph(const std::vector<Vertex*>&);
+    Graph(const std::vector<Vertex*>&, bool = false);
     // destructor
     ~Graph();
-
+    
+    // creates an unweighted graph from a given input stream
     static Graph* getGraphFromStream(std::ifstream &);
+    
+    // create a random graph with numOfKnots vertices and a probability of EdgeProb for
+    // an Edge to exist
     static Graph* getRandomGraph(unsigned int numOfKnots, float EdgeProb);
-    auto getMaxDeg() const -> unsigned int;
+    
+    // return a vector of trees which are all connected component from one graph
+    auto getConnectedComponentGraph() -> std::vector<Graph *>;
+    
+    // get pointer to a vertex by its number
+    auto getVertex(unsigned int number) const -> Vertex*;
+    
+    // get the number of vertices in the entire graph
     auto getNumberOfVertices() const -> unsigned int;
+    
+    // get the maximum vertex degree from the entire graph
+    auto getMaxDeg() const -> unsigned int;
+    
+    // get the number of vertices which have the given degree
     auto getNumberOfVerticesWithDeg(const int) const -> unsigned int;
+    
+    // get the average degree of all vertices
     auto getAverageDeg() const -> float;
+    
+    // get the number of vertices which don't have any neighbor
     auto getNumberOfVerticesWithoutNeighbors() const -> unsigned int;
+    
+    // get all triangles which occur in the graph
     auto getTriangles() const -> std::vector<std::vector<unsigned int>*>*;
-    // returns the number of triangles within the graph
+    
+    // get the number of K3 in the graph
     auto getNumberOfK3() const -> unsigned int;
+    
+    // get the number of K4 in the graph
     auto getNumberOfK4() const -> unsigned int;
     
     // apply the greedy coloring algorithm to the graph and store corresponding
@@ -57,17 +83,17 @@ public:
     // time
     auto getMinNumberOfColors(unsigned int n = 100) -> unsigned int;
     
-    // return the number of nodes within the biggest connected component
-    auto sizeOfMaxConnectedComponent() -> unsigned int;
-    
-    // return the cost for the shortest path from source vertex to desination vertex
-    auto getShortestPath(unsigned int source, unsigned int destination) -> double;
+    // get the number of nodes within the biggest connected component
+    auto getNumberOfMaxConnectedComponent() -> unsigned int;
     
     // get path chain
     auto getPathChain(unsigned int source, unsigned int destination) -> std::vector<unsigned int>*;
     
-    // get weight of minimal spanning tree, assuming the entire graph is connected
-    auto getWeightOfMinimalSpanningTree() -> double;
+    // get spanning tree with maximum weight
+    auto getWeightOfMaxSpanningTree() -> double;
+    
+    // get minimum weight of spanning tree
+    auto getWeightOfMinSpanningTree() -> double;
 
 private:
     // set colors back to 0
@@ -76,8 +102,6 @@ private:
     auto eraseVisiting() -> void;
     // set predecessor entries of each vertex to 0
     auto erasePredecessor() -> void;
-    // get pointer to a vertex by its number
-    auto getVertex(unsigned int number) const -> Vertex*;
     
     // set to 0 if a deletion of a vertex had beed applied to the graph
     bool deletionHadBeenApplied{false};

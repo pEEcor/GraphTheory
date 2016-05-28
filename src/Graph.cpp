@@ -9,7 +9,8 @@
 #include "Graph.hpp"
 
 // constructor
-Graph::Graph(const std::vector<Vertex*>& vertices) : vertices(vertices) {}
+Graph::Graph(const std::vector<Vertex*>& vertices, bool del) : vertices(vertices),
+    deletionHadBeenApplied(del) {}
 
 // destructor
 Graph::~Graph() {
@@ -20,6 +21,8 @@ Graph::~Graph() {
         vertices.pop_back();
     };
 }
+
+//-------------------------------------- static Methods ------------------------------------------//
 
 //class method, which creates a graph from a given stream
 Graph* Graph::getGraphFromStream(std::ifstream &file) {
@@ -90,6 +93,17 @@ Graph *Graph::getRandomGraph(unsigned int numOfKnots, float EdgeProb) {
     }
     // return new graph, created by the vertices vector
     return new Graph(vertices);
+}
+
+//-------------------------------------- public Methods ------------------------------------------//
+
+auto Graph::getVertex(unsigned int number) const -> Vertex* {
+    if (deletionHadBeenApplied) {
+        return *std::find_if(vertices.begin(), vertices.end(), [number] (Vertex* v)->bool {return v->getNumber() == number;});
+    }
+    else {
+        return vertices.at(number -1);
+    }
 }
 
 // private method which returns the greatest degree of the graph
@@ -330,52 +344,38 @@ auto Graph::getMinNumberOfColors(unsigned int n) -> unsigned int{
     return minNumOfColors;
 }
 
-auto Graph::eraseColoring() -> void{
-    for (auto ival : vertices) {
-        ival->setColor(0);
-    }
-    return;
-}
 
-auto Graph::getVertex(unsigned int number) const -> Vertex* {
-    if (deletionHadBeenApplied) {
-        return *std::find_if(vertices.begin(), vertices.end(), [number] (Vertex* v)->bool {return v->getNumber() == number;});
-    }
-    else {
-        return vertices.at(number -1);
-    }
-}
 
-auto Graph::sizeOfMaxConnectedComponent() -> unsigned int {
+auto Graph::getNumberOfMaxConnectedComponent() -> unsigned int {
     // apply a breadth-first search as long as all vertices haven't beed found
     // erase old visiting information first
     eraseVisiting();
     erasePredecessor();
     // var to store number of connected component size
     unsigned int sizeOfConnectedComponent{0};
-    unsigned int VertexCounter{0};
+    unsigned int VertexCounter{1};
     // search queue
     std::queue<unsigned int> Q;
     
     // traverse though all the vertices, order isn't necessary here
-    for (unsigned int i{0}; i < vertices.size(); i++) {
+    for (unsigned int i{1}; i <= vertices.size(); i++) {
         // if vertex had not been visited yet, start a new search
-        if (vertices.at(i)->getVisited() == false) {
+        if (getVertex(i)->getVisited() == false) {
             Q.push(i);
-            vertices.at(i)->setVisited(true);
+            getVertex(i)->setVisited(true);
             // breadth-first search with vertex at i
             while (!Q.empty()) {
                 unsigned int v{Q.front()};
-                auto currentNeighbors = vertices.at(Q.front())->getNeighbors();
+                auto currentNeighbors = getVertex(Q.front())->getNeighbors();
                 Q.pop();
-                VertexCounter++;
                 // add all neighbors to the queue that have not been visited
                 for (auto neighbor : currentNeighbors) {
                     // if not visited yet
                     if (!(getVertex(neighbor)->getVisited())) {
+                        VertexCounter++;
                         Q.push(neighbor);
                         getVertex(neighbor)->setVisited(true);
-                        getVertex(neighbor)->predecessor = vertices.at(v)->getNumber();
+                        getVertex(neighbor)->predecessor = getVertex(v)->getNumber();
                     }
                 }
             }
@@ -389,8 +389,144 @@ auto Graph::sizeOfMaxConnectedComponent() -> unsigned int {
     }
     // at least every single vertex is connected to itself, thus the smallest connected
     // component is one
-    return sizeOfConnectedComponent + 1;
+    return sizeOfConnectedComponent;
 }
+
+auto Graph::getPathChain(unsigned int s, unsigned int d) -> std::vector<unsigned int>* {
+    
+    auto result = new std::vector<unsigned int>;
+    unsigned int tmp{d};
+    result->push_back(tmp);
+    
+    while(s != tmp) {
+        if (getVertex(tmp)->predecessor == 0) {
+            return NULL;
+        }
+        tmp = getVertex(tmp)->predecessor;
+        result->push_back(tmp);
+    }
+    
+    std::reverse(result->begin(), result->end());
+    return result;
+}
+
+auto Graph::getConnectedComponentGraph() -> std::vector<Graph *>{
+    // apply a breadth-first search as long as all vertices haven't beed found
+    // erase old visiting information first
+    eraseVisiting();
+    erasePredecessor();
+    // search queue
+    std::queue<unsigned int> Q;
+    std::vector<Graph *> result;
+    
+    // traverse though all the vertices, order isn't necessary here
+    for (unsigned int i{1}; i <= vertices.size(); i++) {
+        std::vector<Vertex *> newVertices;
+        // if vertex had not been visited yet, start a new search
+        if (getVertex(i)->getVisited() == false) {
+            Q.push(i);
+            getVertex(i)->setVisited(true);
+            // breadth-first search with vertex at i
+            while (!Q.empty()) {
+                unsigned int v{Q.front()};
+                auto currentNeighbors = getVertex(v)->getNeighbors();
+                newVertices.push_back(getVertex(v));
+                Q.pop();
+                // add all neighbors to the queue that have not been visited
+                for (auto neighbor : currentNeighbors) {
+                    // if not visited yet
+                    if (!(getVertex(neighbor)->getVisited())) {
+                        Q.push(neighbor);
+                        getVertex(neighbor)->setVisited(true);
+                        getVertex(neighbor)->predecessor = getVertex(v)->getNumber();
+                    }
+                }
+            }
+            // push the current connected component as graph into vector result
+            result.push_back(new Graph(newVertices, true));
+            
+        }
+    }
+    // at least every single vertex is connected to itself, thus the smallest connected
+    // component is one
+    return result;
+}
+
+auto Graph::getWeightOfMaxSpanningTree() -> double {
+    double result = 0;
+    std::vector<edge> E;
+    
+    std::map<unsigned int, unsigned int> R;
+    for (int i = 0; i < vertices.size(); i++) {
+        R.insert({vertices.at(i)->getNumber(), i+1});
+    }
+    
+    for (auto vertex : vertices) {
+        for (auto edge : vertex->getEdges()) {
+            E.push_back(edge);
+        }
+    }
+    
+    std::sort(E.begin(), E.end(), [](edge a, edge b)->bool { return a.weight > b.weight;});
+    
+    std::vector<edge> F;
+    
+    for (int i = 0; i < E.size(); i++) {
+        if (R.find(E.at(i).to)->second != R.find(E.at(i).from)->second) {
+            F.push_back(E.at(i));
+            unsigned int tmp = R.find(E.at(i).to)->second;
+            for (auto &r : R) {
+                if (r.second == tmp) {
+                    r.second = R.find(E.at(i).from)->second;
+                }
+            }
+        }
+    }
+    
+    for (auto f : F) {
+        result += f.weight;
+    }
+    return result;
+}
+
+auto Graph::getWeightOfMinSpanningTree() -> double {
+    double result = 0;
+    std::vector<edge> E;
+    
+    std::map<unsigned int, unsigned int> R;
+    for (int i = 0; i < vertices.size(); i++) {
+        R.insert({vertices.at(i)->getNumber(), i+1});
+    }
+    
+    for (auto vertex : vertices) {
+        for (auto edge : vertex->getEdges()) {
+            E.push_back(edge);
+        }
+    }
+    
+    std::sort(E.begin(), E.end(), [](edge a, edge b)->bool { return a.weight < b.weight;});
+    
+    std::vector<edge> F;
+    
+    for (int i = 0; i < E.size(); i++) {
+        if (R.find(E.at(i).to)->second != R.find(E.at(i).from)->second) {
+            F.push_back(E.at(i));
+            unsigned int tmp = R.find(E.at(i).to)->second;
+            for (auto &r : R) {
+                if (r.second == tmp) {
+                    r.second = R.find(E.at(i).from)->second;
+                }
+            }
+        }
+    }
+    
+    for (auto f : F) {
+        result += f.weight;
+    }
+    return result;
+}
+
+//-------------------------------------- private Methods -----------------------------------------//
 
 auto Graph::eraseVisiting() -> void {
     for (auto vertex : vertices) {
@@ -404,57 +540,9 @@ auto Graph::erasePredecessor() -> void {
     }
 }
 
-// implementation of dijsktra, can not handle negative weights
-auto Graph::getShortestPath(unsigned int source, unsigned int destination) -> double {
-    // minDistance vector which will contain the minimum distance from start to every other vertex
-    std::vector<float> minDistance(vertices.size()+1, std::numeric_limits<double>::max());
-    // distance to source is 0
-    minDistance.at(source) = 0;
-    
-    std::set<std::pair<float, unsigned int>> activeVertices;
-    
-    activeVertices.insert({0, source});
-    
-    while (!activeVertices.empty()) {
-        unsigned int x = activeVertices.begin()->second;
-        if (x == destination) {
-            return minDistance.at(x);
-        }
-        activeVertices.erase(activeVertices.begin());
-        for (auto neighbor : getVertex(x)->getNeighbors()) {
-            if (minDistance.at(neighbor) > minDistance.at(x) + getVertex(x)->getWeightTo(neighbor)) {
-                activeVertices.erase({minDistance.at(neighbor), neighbor});
-                minDistance.at(neighbor) = minDistance.at(x) + getVertex(x)->getWeightTo(neighbor);
-                activeVertices.insert({minDistance.at(neighbor), neighbor});
-                getVertex(neighbor)->predecessor = x;
-            }
-        }
+auto Graph::eraseColoring() -> void{
+    for (auto ival : vertices) {
+        ival->setColor(0);
     }
-    return std::numeric_limits<double>::max();
+    return;
 }
-
-auto Graph::getPathChain(unsigned int source, unsigned int destination) -> std::vector<unsigned int>* {
-    
-    auto result = new std::vector<unsigned int>;
-    unsigned int tmp{destination};
-    result->push_back(tmp);
-    
-    while(source != tmp) {
-        if (getVertex(tmp)->predecessor == 0) {
-            return NULL;
-        }
-        tmp = getVertex(tmp)->predecessor;
-        result->push_back(tmp);
-    }
-    
-    std::reverse(result->begin(), result->end());
-    return result;
-}
-
-auto Graph::getWeightOfMinimalSpanningTree() -> double {
-    // weight
-    double weight{0};
-
-    return weight;
-}
-

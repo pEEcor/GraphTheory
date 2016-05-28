@@ -19,6 +19,9 @@ public:
     
     // static methods
     static WeightedGraph* getGraphFromStream(std::ifstream &);
+    
+    // return the cost for the shortest path from source vertex to desination vertex
+    auto getShortestPath(unsigned int source, unsigned int destination) -> double;
 };
 
 #endif /* WeightedGraph_hpp */

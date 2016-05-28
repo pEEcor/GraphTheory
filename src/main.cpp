@@ -18,6 +18,7 @@ auto exercise45() -> void;
 auto exercise54() -> void;
 auto exercise65() -> void;
 auto exercise75() -> void;
+auto onlinetest6() -> void;
 
 int main(int argc, const char * argv[]) {
     std::cout << "Starting...\n\n";
@@ -29,6 +30,7 @@ int main(int argc, const char * argv[]) {
     //exercise54();
     //exercise65();
     exercise75();
+    //onlinetest6();
     
     std::cout << "DONE" << std::endl;
     
@@ -171,7 +173,7 @@ auto exercise54() -> void {
         Graph *graph = Graph::getRandomGraph(10000, p);
         std::cout << "Average Deg: " << graph->getAverageDeg() << std::endl;
         
-        std::cout << "Biggest connected component: " << graph->sizeOfMaxConnectedComponent() << std::endl;
+        std::cout << "Biggest connected component: " << graph->getNumberOfMaxConnectedComponent() << std::endl;
         delete graph;
         }
 }
@@ -219,7 +221,7 @@ auto exercise75() -> void {
     // create file stream and open graph15.txt
     std::ifstream file;
     std::cout << "Opening File...";
-    file.open("testgraph.txt", std::ios::in);
+    file.open("graph75.txt", std::ios::in);
     std::cout << "Done" << std::endl;
     
     // check if opening the file was successfull
@@ -238,8 +240,53 @@ auto exercise75() -> void {
         std::cerr << "Invalid Filename" << std::endl;
     }
     
-    auto result = graph->getWeightOfMinimalSpanningTree();
+    auto result = graph->getWeightOfMinSpanningTree();
     std::cout << "Weight of minimal spanning tree: " << result << std::endl;
     
     
+}
+
+auto onlinetest6() -> void {
+    WeightedGraph* graph = NULL;
+    
+    // create file stream and open graph15.txt
+    std::ifstream file;
+    std::cout << "Opening File...";
+    file.open("G67575146.txt", std::ios::in);
+    std::cout << "Done" << std::endl;
+    
+    // check if opening the file was successfull
+    if(file.good()) {
+        std::cout << "Creating Graph...";
+        graph = WeightedGraph::getGraphFromStream(file);
+        std::cout << "Done" << std::endl;
+        // close file
+        if(file.is_open()) {
+            std::cout << "Closing File...";
+            file.close();
+            std::cout << "Done" << std::endl;
+        }
+    }
+    else {
+        std::cerr << "Invalid Filename" << std::endl;
+    }
+    
+    // get all connected subgraphs
+    auto ConnectedComponents = graph->getConnectedComponentGraph();
+    
+    // sort all connected subgraphs by their number of vertices
+    std::sort(ConnectedComponents.begin(), ConnectedComponents.end(),
+        [] (Graph *a, Graph *b)->bool {return a->getNumberOfVertices() > b->getNumberOfVertices();});
+    
+    // print weight of all connected subgraphs
+    int i{1};
+    for(auto subGraph : ConnectedComponents) {
+        if (subGraph->getNumberOfVertices() > 1) {
+            //auto size = subGraph->getNumberOfVertices();
+            //std::cout << "Size of " << i << ". component: " << size << std::endl;
+            auto weight = subGraph->getWeightOfMaxSpanningTree();
+            std::cout << "Weight of " << i << ". biggest component: " << weight << std::endl;
+            i++;
+        }
+    }
 }

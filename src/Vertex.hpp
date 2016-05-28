@@ -11,6 +11,12 @@
 
 #include <vector>
 
+struct edge {
+    int from = 0;
+    int to = 0;
+    float weight = 0;
+};
+
 class Vertex {
 public:
     // constructor
@@ -25,6 +31,7 @@ public:
     
     auto getDegree() const -> unsigned int;
     auto getNeighbors() -> std::vector<int> &;
+    auto getEdges() -> std::vector<edge> &;
     auto addNeigbor(unsigned int) -> void;
     auto getNumber() const -> unsigned int;
     auto checkForNeighbor(int vertex) const -> bool;
@@ -38,8 +45,9 @@ public:
     unsigned int predecessor{0};
     
 private:
-    std::vector<int> neighbors;
-    std::vector<float> weights;
+    //std::vector<int> neighbors;
+    //std::vector<float> weights;
+    std::vector<edge> edges;
     unsigned int number;
     unsigned int color;
     bool visited = false;
