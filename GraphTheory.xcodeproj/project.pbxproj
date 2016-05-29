@@ -26,7 +26,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		5C145B001CF591FE00CF3C51 /* G67575146.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = G67575146.txt; sourceTree = "<group>"; };
+		5C145B001CF591FE00CF3C51 /* onlinetest6.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = onlinetest6.txt; sourceTree = "<group>"; };
 		5C145B0C1CF87A7C00CF3C51 /* testgraph2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = testgraph2.txt; path = Build/Products/Debug/testgraph2.txt; sourceTree = SOURCE_ROOT; };
 		5C6588941CCE6B670074C4B6 /* Graph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Graph.cpp; sourceTree = "<group>"; };
 		5C6588951CCE6B670074C4B6 /* Graph.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Graph.hpp; sourceTree = "<group>"; };
@@ -90,15 +90,15 @@
 		5CEB3BAE1CBEB4B9006998E9 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				5C943D741CEE1F7500E8E83B /* testgraph.txt */,
 				5C145B0C1CF87A7C00CF3C51 /* testgraph2.txt */,
-				5C145B001CF591FE00CF3C51 /* G67575146.txt */,
 				5CF9C0A11CC2AEE300D6EDB9 /* graph15.txt */,
 				5CF9C0A21CC2AEE300D6EDB9 /* graph25.txt */,
 				5CBEBA941CC793E9009A63C3 /* graph34.txt */,
 				5CD8B88A1CEA171D0025C0B1 /* graph65.txt */,
 				5C7B34461CEF2BED00530CA6 /* graph75.txt */,
 				5CF8188B1CD0B36E00F8FCD6 /* onlinetest.txt */,
-				5C943D741CEE1F7500E8E83B /* testgraph.txt */,
+				5C145B001CF591FE00CF3C51 /* onlinetest6.txt */,
 			);
 			name = Data;
 			path = Build/Products/Debug;

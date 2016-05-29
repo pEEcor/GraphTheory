@@ -452,6 +452,35 @@ auto Graph::getConnectedComponentGraph() -> std::vector<Graph *>{
     return result;
 }
 
+// implementation of dijsktra, can not handle negative weights
+auto Graph::getShortestPath(unsigned int source, unsigned int destination) -> double {
+    // minDistance vector which will contain the minimum distance from start to every other vertex
+    std::vector<float> minDistance(getNumberOfVertices()+1, std::numeric_limits<double>::max());
+    // distance to source is 0
+    minDistance.at(source) = 0;
+    
+    std::set<std::pair<float, unsigned int>> activeVertices;
+    
+    activeVertices.insert({0, source});
+    
+    while (!activeVertices.empty()) {
+        unsigned int x = activeVertices.begin()->second;
+        if (x == destination) {
+            return minDistance.at(x);
+        }
+        activeVertices.erase(activeVertices.begin());
+        for (auto neighbor : getVertex(x)->getNeighbors()) {
+            if (minDistance.at(neighbor) > minDistance.at(x) + 1) {
+                activeVertices.erase({minDistance.at(neighbor), neighbor});
+                minDistance.at(neighbor) = minDistance.at(x) + 1;
+                activeVertices.insert({minDistance.at(neighbor), neighbor});
+                getVertex(neighbor)->predecessor = x;
+            }
+        }
+    }
+    return std::numeric_limits<double>::max();
+}
+
 auto Graph::getWeightOfMaxSpanningTree() -> double {
     double result = 0;
     std::vector<edge> E;

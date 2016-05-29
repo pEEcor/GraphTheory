@@ -86,6 +86,9 @@ public:
     // get the number of nodes within the biggest connected component
     auto getNumberOfMaxConnectedComponent() -> unsigned int;
     
+    // get shortest path, assuming each edge has a weight of 1
+    auto virtual getShortestPath(unsigned int source, unsigned int destination) -> double;
+    
     // get path chain
     auto getPathChain(unsigned int source, unsigned int destination) -> std::vector<unsigned int>*;
     
