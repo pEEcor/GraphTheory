@@ -97,6 +97,17 @@ Graph *Graph::getRandomGraph(unsigned int numOfKnots, float EdgeProb) {
 
 //-------------------------------------- public Methods ------------------------------------------//
 
+
+auto Graph::getEdges() -> std::vector<edge>* {
+    auto edges = new std::vector<edge>;
+    for (auto vertex : vertices) {
+        for (auto vertexEdge : vertex->getEdges()) {
+            edges->push_back(vertexEdge);
+        }
+    }
+    return edges;
+}
+
 auto Graph::getVertex(unsigned int number) const -> Vertex* {
     if (deletionHadBeenApplied) {
         return *std::find_if(vertices.begin(), vertices.end(), [number] (Vertex* v)->bool {return v->getNumber() == number;});
@@ -553,6 +564,28 @@ auto Graph::getWeightOfMinSpanningTree() -> double {
         result += f.weight;
     }
     return result;
+}
+
+auto Graph::getGreedyMatching() -> std::vector<edge>& {
+    auto M = new std::vector<edge>;
+    auto E = getEdges();
+    for (auto e : *E) {
+        if (M->size() == 0){
+            M->push_back(e);
+        }
+        else {
+            bool found = false;
+            for (auto f : *M) {
+                if (f.from == e.from || f.from == e.to || f.to == e.from || f.to == e.to) {
+                    found = true;
+                }
+            }
+            if (!found) {
+                M->push_back(e);
+            }
+        }
+    }
+    return *M;
 }
 
 //-------------------------------------- private Methods -----------------------------------------//

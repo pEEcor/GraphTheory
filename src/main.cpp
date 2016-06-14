@@ -21,6 +21,7 @@ auto exercise65() -> void;
 auto exercise75() -> void;
 auto onlinetest6() -> void;
 auto onlinetest8() -> void;
+auto exercise91() -> void;
 
 int main(int argc, const char * argv[]) {
     std::cout << "Starting...\n\n";
@@ -33,7 +34,8 @@ int main(int argc, const char * argv[]) {
     //exercise65();
     //exercise75();
     //onlinetest6();
-    onlinetest8();
+    //onlinetest8();
+    exercise91();
     
     std::cout << "DONE" << std::endl;
     
@@ -320,4 +322,20 @@ auto onlinetest8() -> void {
     }
     
     std::cout << "Penelty Costs: " << scheduler->schedule() << std::endl;
+}
+
+auto exercise91() -> void {
+    
+    std::vector<int> N{100, 250, 500, 1000};
+    std::vector<std::vector<edge>> results;
+    for(auto n : N) {
+        for (double i = 0.1; i <= 1; i += 0.1) {
+            Graph *graph = Graph::getRandomGraph(n, i);
+            
+            results.push_back(graph->getGreedyMatching());
+            
+            delete graph;
+        }
+    }
+    std::cout << "matchings created" << std::endl;
 }

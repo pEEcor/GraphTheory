@@ -87,6 +87,7 @@ auto Vertex::addNeigbor(unsigned int newNeighbor) -> void {
     if (result == edges.end()) {
         edge kante;
         kante.to = newNeighbor;
+        kante.from = number;
         edges.push_back(kante);
     }
 }

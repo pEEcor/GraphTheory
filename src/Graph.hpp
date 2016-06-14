@@ -39,6 +39,9 @@ public:
     // return a vector of trees which are all connected component from one graph
     auto getConnectedComponentGraph() -> std::vector<Graph *>;
     
+    // return a vector of all edges
+    auto getEdges() -> std::vector<edge>*;
+    
     // get pointer to a vertex by its number
     auto getVertex(unsigned int number) const -> Vertex*;
     
@@ -97,6 +100,9 @@ public:
     
     // get minimum weight of spanning tree
     auto getWeightOfMinSpanningTree() -> double;
+    
+    // get matching
+    auto getGreedyMatching() -> std::vector<edge>&;
 
 private:
     // set colors back to 0
