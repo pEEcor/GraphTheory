@@ -7,9 +7,10 @@
 //
 
 #include <iostream>
+#include <fstream>
 #include "Graph.hpp"
 #include "WeightedGraph.hpp"
-#include <fstream>
+#include "Scheduler.hpp"
 
 auto exercise15() -> void;
 auto exercise25() -> void;
@@ -19,6 +20,7 @@ auto exercise54() -> void;
 auto exercise65() -> void;
 auto exercise75() -> void;
 auto onlinetest6() -> void;
+auto onlinetest8() -> void;
 
 int main(int argc, const char * argv[]) {
     std::cout << "Starting...\n\n";
@@ -29,8 +31,9 @@ int main(int argc, const char * argv[]) {
     //exercise45();
     //exercise54();
     //exercise65();
-    exercise75();
+    //exercise75();
     //onlinetest6();
+    onlinetest8();
     
     std::cout << "DONE" << std::endl;
     
@@ -252,7 +255,7 @@ auto onlinetest6() -> void {
     // create file stream and open graph15.txt
     std::ifstream file;
     std::cout << "Opening File...";
-    file.open("G67575146.txt", std::ios::in);
+    file.open("G65100736.txt", std::ios::in);
     std::cout << "Done" << std::endl;
     
     // check if opening the file was successfull
@@ -289,4 +292,32 @@ auto onlinetest6() -> void {
             i++;
         }
     }
+}
+
+auto onlinetest8() -> void {
+    Scheduler* scheduler = NULL;
+    
+    // create file stream and open graph15.txt
+    std::ifstream file;
+    std::cout << "Opening File...";
+    file.open("S85461086.txt", std::ios::in);
+    std::cout << "Done" << std::endl;
+    
+    // check if opening the file was successfull
+    if(file.good()) {
+        std::cout << "Creating Graph...";
+        scheduler = Scheduler::getTasksFromStream(file);
+        std::cout << "Done" << std::endl;
+        // close file
+        if(file.is_open()) {
+            std::cout << "Closing File...";
+            file.close();
+            std::cout << "Done" << std::endl;
+        }
+    }
+    else {
+        std::cerr << "Invalid Filename" << std::endl;
+    }
+    
+    std::cout << "Penelty Costs: " << scheduler->schedule() << std::endl;
 }
